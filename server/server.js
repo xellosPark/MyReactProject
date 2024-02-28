@@ -37,6 +37,51 @@ app.post('/generate-token', (req, res) => {
     res.status(404).json({ message: 'User not found' });
   }
 });
+//https://expressjs.com/ko/guide/routing.html 참조
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+
+app.get('/login', (req, res) => {
+   let id = 'abcd'
+   let pw = '1234'
+
+   // DB확인
+   // selet = from user where id = '${id}' and pw = '${pw}'
+
+   // 데이터 존재
+   // 토큰 존재
+
+   //https://awlhdla.tistory.com/144 참조
+
+   // https://www.npmjs.com/package/jsonwebtoken
+   token = jwt.sign({
+    type: 'JWT',
+    id: id,
+  }, '1234', {
+    expiresIn: '15m', // 만료시간 15분
+    issuer: 'yhw',
+  });
+  res.send(token)
+});
+
+app.get('/getOrderList', (req, res) => {
+
+  let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJhYmNkIiwiaWF0IjoxNzA5MTI3MzAwLCJleHAiOjE3MDkxMjgyMDAsImlzcyI6InlodyJ9.LhavjAU4tQNu3Z_XnyDJVzoWhKc69_jNZ1AORpYix8g'
+  jwt.verify(token, '1234', (error, decoded) => {
+    if (error) {
+      console.log(`에러가 났습니다\n ${error}`);
+    }
+
+    // DB 조회
+    // select * from table where u_id = '${decoed.id}'
+
+    console.log(decoded);
+    res.send(decoded);
+  })
+});
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
