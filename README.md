@@ -6,3 +6,5 @@ rfec
 
 값을 전달할때는 
 props 사용
+
+npm i express nodemon dotenv cors

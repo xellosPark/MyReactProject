@@ -1,5 +1,7 @@
 import './App.css';
 import {useState, useRef} from "react";
+import LoginForm from './LoginForm';
+import axios from 'axios';
 
 function Badinput() {
 
@@ -40,6 +42,36 @@ function Goodinput() {
     </div>
   );
 }
+
+function Tokenlogin() {
+  const handleLogin = async (username, password) => {
+    try {
+      const response = await axios.post('YOUR_AUTH_API_ENDPOINT', {
+        username,
+        password,
+      });
+
+      const { data } = response;
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        alert('Login successful!');
+      } else {
+        alert('Login failed!');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed!');
+    }
+  };
+
+  return (
+    <div>
+      <LoginForm onLogin={handleLogin} />
+    </div>
+  );
+}
+
+
 
 function CountDefEx() {
 
@@ -82,6 +114,8 @@ function App() {
       <Goodinput/>
       <hr></hr>
       <CountDefEx/>
+      <hr></hr>
+      <Tokenlogin/>
     </div>
   );
 }
