@@ -1,5 +1,5 @@
 npm install redux
-
+npm install react-redux
 
 {
   __DO_NOT_USE__ActionTypes: [Getter],
