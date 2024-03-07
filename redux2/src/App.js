@@ -1,6 +1,7 @@
 import './App.css';
 import {createStore} from 'redux';
 import {Provider, useSelector, useDispatch} from 'react-redux';
+
 function reducer(state, action){
   if(action.type === 'up'){
     return {...state, value:state.value + action.step}
