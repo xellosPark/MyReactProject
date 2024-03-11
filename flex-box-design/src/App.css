@@ -1,0 +1,64 @@
+.container {
+  width: 80%;
+  height: 800px;
+  margin: 0 auto;
+  border: 10px solid #000;
+
+  /* flex 방향 <- ->, default가 가로임(row) */
+  display: flex;
+  
+  /* <- -> 가로*/
+  flex-direction: row;
+
+  /* ^ v 세로 */
+  /* flex-direction: column; */
+
+  gap: 1em;
+
+
+  /* justify-content */
+  /* 축이 row일 경우 start:좌<- end:우-> */
+  /* 축이 column일 경우 start:위^ end:아래 v */
+
+  /* align-items */
+  /* 축이 row일 경우 start:좌<- end:우-> */
+  /* 축이 column일 경우 start:위^ end:아래 v */
+
+  /* justify-content: center; */
+  /* justify-content: flex-end; */
+  /* justify-content: flex-start;  */
+  /* flex-batween 좌우 간격 유지  */
+  /* justify-content: space-between; */
+  /* justify-content: space-around; */
+  /* justify-content: space-evenly; */
+
+  /* align-items: center; */
+  align-items: flex-start;
+  /* align-items: flex-end; */
+}
+
+.flex-item {
+  background-color: #ccc;
+  border: 5px solid red;
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  padding: 0.2em;
+  text-align: center;
+}
+
+.item-1{
+  font-size: 1.5rem;
+  /* order: -1; */
+}
+
+.item-2{
+  font-size: 1.5rem;
+  border-color: greenyellow;
+}
+
+.item-3{
+  font-size: 1.5rem;
+  border-color: blue;
+  /* order: -1; */
+}
