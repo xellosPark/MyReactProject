@@ -9,7 +9,7 @@ export default function Login({ setIsLogin, setUser }) {
 
   const login = () => {
     axios({
-      url: "http://localhost:8123/login",
+      url: "http://localhost:5050/login",
       method: "POST",
       withCredentials: true,
       data: {

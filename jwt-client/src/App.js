@@ -10,7 +10,7 @@ function App() {
 
   const accessToken = () => {
     axios({
-      url: "http://localhost:8123/accesstoken",
+      url: "http://localhost:5050/accesstoken",
       method: "GET",
       withCredentials: true,
     });
@@ -18,7 +18,7 @@ function App() {
 
   const refreshToken = () => {
     axios({
-      url: "http://localhost:8123/refreshtoken",
+      url: "http://localhost:5050/refreshtoken",
       method: "GET",
       withCredentials: true,
     });
@@ -26,7 +26,7 @@ function App() {
 
   const logout = () => {
     axios({
-      url: "http://localhost:8123/logout",
+      url: "http://localhost:5050/logout",
       method: "POST",
       withCredentials: true,
     }).then((result) => {
@@ -39,7 +39,7 @@ function App() {
   useEffect(() => {
     try {
       axios({
-        url: "http://localhost:8123/login/success",
+        url: "http://localhost:5050/login/success",
         method: "GET",
         withCredentials: true,
       })

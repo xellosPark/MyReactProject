@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+  height: 100vh; /* Use 100% of the viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 0;
+  background-color: #F6D6D6;
+}
+
+.main-container {
+  display: flex;
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+  
+}
+
+/* Custom heights for each Today component */
+.Today-1 {
+  height: 150px; /* Adjust this value as needed */
+}
+
+.Today-2 {
+  height: 1px; /* Adjust this value as needed */
+}
+
+.Today-3 {
+  height: 200px; /* Adjust this value as needed */
+}
+
+
+/* .left-panel {
+  display: flex;
+  flex-direction: column;
+  width: 40%; /* Adjust to fit your layout } */
+
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This ensures space is distributed between items */
+  width: 40%; 
+}
+

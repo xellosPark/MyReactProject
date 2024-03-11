@@ -6,13 +6,15 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
 
   const userInfo = userDatabase.filter((item) => {
+    console.log(`email : ${item.email} pw : ${email} `);
     return item.email === email;
   })[0];
 
   if (!userInfo) {
-    res.status(403).json("Not Authorized");
+      res.status(403).json("Not Authorized");
   } else {
     try {
+      console.log(`id:${userInfo.id} Name:${userInfo.username} email:${userInfo.email} `);
       // access Token 발급
       const accessToken = jwt.sign({
         id : userInfo.id,
@@ -22,6 +24,7 @@ const login = (req, res, next) => {
         expiresIn : '1m',
         issuer : 'About Tech',
       });
+      console.log(`2:id:${userInfo.id} Name:${userInfo.username} email:${userInfo.email} `);
 
       // refresh Token 발급
       const refreshToken = jwt.sign({
@@ -43,12 +46,12 @@ const login = (req, res, next) => {
         secure : false,
         httpOnly : true,
       })
-
+      res.send(`a:${accessToken} R:${refreshToken}`);
+      
+      
       res.status(200).json("login success");
-
-
     } catch (error) {
-        res.status(500).json(error);
+      res.status(500).json(error);
     }
   }
 };
