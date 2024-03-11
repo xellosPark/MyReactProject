@@ -15,31 +15,29 @@ export default function FullCalendarComponent() {
 
 
   return (
-    <div className="calendar-parent">
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          left: 'prev', // 좌측 버튼 그룹: '이전', '다음', '오늘'
-          center: 'title', // 중앙: 달력 제목
-          right: 'next,today' // 우측 버튼 그룹: 빈 문자열로 설정하여 비활성화
-        }}
-        
-        
-        weekends={true}
-        locale={koLocale} // 한국어 locale 적용
-        events={[
-          { title: '이벤트 1', date: '2024-03-17' },
-          { title: '이벤트 2', date: '2024-03-19' }
-        ]}
-         // 여기에 스타일을 추가합니다.
-        dayCellContent={handleDayCellContent} // 날짜 셀 커스텀 렌더링 1일 -> 1
-        height="700px" // 높이 조절
-        
-        
-        firstDay={1} // 주의 첫 번째 날을 월요일로 설정 (0: 일요일, 1: 월요일)
-        
-      />
-    </div>
+    <div className="aaa">
+      <div className="calendar-parent" >
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: 'prev', // 좌측 버튼 그룹: '이전', '다음', '오늘'
+            center: 'title', // 중앙: 달력 제목
+            right: 'next,today' // 우측 버튼 그룹: 빈 문자열로 설정하여 비활성화
+          }}
+          
+          
+          weekends={true}
+          locale={koLocale} // 한국어 locale 적용
+          events={[
+            { title: '이벤트 1', date: '2024-03-17' },
+            { title: '이벤트 2', date: '2024-03-19' }
+          ]}
+          // 여기에 스타일을 추가합니다.
+          dayCellContent={handleDayCellContent} // 날짜 셀 커스텀 렌더링 1일 -> 1
+          height="700px" // 높이 조절
+        />
+      </div>
+    </div> 
   );
 }
