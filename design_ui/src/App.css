@@ -1,45 +1,71 @@
-.App {
-  text-align: center;
-  height: 100vh; /* Use 100% of the viewport height */
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-  padding: 0;
+  width: 100%;
+  height: 100vh;
   background-color: #F6D6D6;
-}
-
-.main-container {
-  display: flex;
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Full height of the container */
   
 }
 
-/* Custom heights for each Today component */
-.Today-1 {
-  height: 150px; /* Adjust this value as needed */
-}
-
-.Today-2 {
-  height: 1px; /* Adjust this value as needed */
-}
-
-.Today-3 {
-  height: 200px; /* Adjust this value as needed */
-}
-
-
-/* .left-panel {
+.left-column, .right-column {
   display: flex;
   flex-direction: column;
-  width: 40%; /* Adjust to fit your layout } */
 
-
-.left-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* This ensures space is distributed between items */
-  width: 40%; 
 }
 
+.left-column {
+  flex: 1;
+  margin-top: 15px;
+}
+
+.right-column {
+  flex: 3;
+  margin-left: 4px;
+}
+
+.top-row, .middle-row {
+  display: flex;
+}
+
+.item {
+  padding: 10px;
+}
+
+.item-gray {
+  background-color: gray; /* Gray background for specified items */
+}
+
+.item-White {
+  background-color: white; /* Gray background for specified items */
+}
+
+.item-blue {
+  border-radius: 8px 8px 0px 0px;
+  background-color: #6CC3D5; /* Gray background for specified items */
+}
+
+.item-green{
+  border-radius: 8px 8px 0px 0px;
+  background-color: #92CCC0;
+}
+
+.item-normal {
+  background-color: peachpuff; /* Normal background for other items */
+  height: 30%;
+}
+
+.item-large {
+  flex-grow: 1;
+  background-color: gray; /* Assuming item 6 is also gray */
+}
+
+.item-extra-large {
+  height: 100%;
+  background-color: peachpuff;
+  
+}
+
+.top-row .item, .middle-row .item {
+  flex-basis: 0;
+  flex-grow: 5;
+  margin-left: 10px;
+}

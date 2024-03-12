@@ -25,9 +25,6 @@ export default function FullCalendarComponent() {
             center: 'title', // 중앙: 달력 제목
             right: 'next,today' // 우측 버튼 그룹: 빈 문자열로 설정하여 비활성화
           }}
-          
-          
-          weekends={true}
           locale={koLocale} // 한국어 locale 적용
           events={[
             { title: '이벤트 1', date: '2024-03-17' },

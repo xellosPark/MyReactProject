@@ -1,9 +1,9 @@
 
 .calendar-parent {
-    width: 100%; /* This ensures that the calendar takes the full width of its parent */
-    /* Additional styles to ensure it fits well, like padding or margin adjustments, might be needed */
-    margin: 10px ;
-  }
+    height: 100%;    
+    margin: 10px 10px 0px 5px;
+
+}
 
 /* 캘린더 전체 사이즈 조정 */
 .fc {
