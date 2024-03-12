@@ -1,0 +1,13 @@
+
+import './App.css';
+import ItemManager from './DataDB/ItemManager';
+
+function App() {
+  return (
+    <div className="App">
+      안녕
+    </div>
+  );
+}
+
+export default App;
