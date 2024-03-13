@@ -1,7 +1,6 @@
 function Navigation() {
     return (
         <div className="App">
-
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">djpack</a>
@@ -11,13 +10,13 @@ function Navigation() {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Hom</a>
+                                <a class="nav-link active" aria-current="page" href="/home">Hom</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="/features">Features</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">pricing</a>
+                                <a class="nav-link" href="/pricing">pricing</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled">Disabled</a>
@@ -26,8 +25,6 @@ function Navigation() {
                     </div>
                 </div>
             </nav>
-
-
         </div>
     );
 }
