@@ -35,6 +35,33 @@
   /* align-items: center; */
   align-items: flex-start;
   /* align-items: flex-end; */
+
+  /*
+  /* align-items: baseline; */
+  /* 달라붙을때ㅐ 기준점이 아래가 v baseline */
+
+  /* wrap은 nowrap이 default */
+  /* wrap은 작아져도, 원래 자기 크기까지는 지킴. */
+  /* flex-wrap은 nowrap */
+  flex-wrap: wrap;
+
+  /* align-content 단체 VS. align-self 개별; */
+  /* align-content : space-around */
+  /* align-content : flex-start*/
+  /* align-content : space-between*/
+  /* align-content : space-evenly;*/
+
+  
+.flex-item {
+  background-color: #ccc; /* Background color  */
+  border: 5px solid red; 
+  border-radius: 10px;
+  width: 80px; 
+  height: 80px; 
+  padding: 0.2em;
+  text-align: center;
+}
+
 }
 
 .flex-item {
