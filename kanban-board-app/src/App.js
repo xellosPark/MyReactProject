@@ -8,107 +8,85 @@ function App() {
     { id: 'task-3', text: 'Write an essay', status: 'complete' },
   ]);
   const [newTaskText, setNewTaskText] = useState('');
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [draggedItem, setDraggedItem] = useState(null);
 
-  const onDragStart = (event, taskId) => {
-    event.dataTransfer.setData('taskId', taskId);
+  const handleDragStart = (e, item) => {
+    setDraggedItem(item);
   };
 
-  const onDrop = (event, newStatus) => {
-    const taskId = event.dataTransfer.getData('taskId');
-    const updatedTasks = tasks.map(task => {
-      if (task.id === taskId) {
-        task.status = newStatus;
-      }
-      return task;
-    });
+  const handleDragOver = (e) => {
+    e.preventDefault(); // Necessary to allow for dropping.
+  };
+
+  const handleDrop = (e, status) => {
+    e.preventDefault();
+
+    // Determine position where item is dropped.
+    const updatedTasks = [...tasks];
+    const draggedIndex = tasks.findIndex(task => task.id === draggedItem.id);
+
+    // Remove item from original position.
+    updatedTasks.splice(draggedIndex, 1);
+
+    // Find drop target index.
+    const dropTarget = e.target.closest('.task-item');
+    const dropTargetId = dropTarget ? dropTarget.getAttribute('data-id') : null;
+    const dropIndex = dropTargetId ? tasks.findIndex(task => task.id === dropTargetId) : tasks.length;
+
+    // Adjust for items dropped in the same list towards the end.
+    const finalIndex = dropIndex > draggedIndex ? dropIndex - 1 : dropIndex;
+
+    // Insert item in new position.
+    updatedTasks.splice(finalIndex, 0, { ...draggedItem, status: status });
+
     setTasks(updatedTasks);
-    setSelectedTaskId(null); // Clear selected task upon successful drop to avoid stale selection
-  };
-
-  const onDragOver = (event) => {
-    event.preventDefault();
+    setDraggedItem(null);
   };
 
   const addNewTask = () => {
-    if (!newTaskText.trim()) return; // Avoid adding empty tasks
+    if (!newTaskText.trim()) return;
     const newTask = {
-      id: `task-${Date.now()}`, // Generate a unique ID based on the current timestamp
+      id: `task-${Date.now()}`,
       text: newTaskText,
       status: 'issue',
     };
     setTasks(prevTasks => [...prevTasks, newTask]);
     setNewTaskText('');
-    setSelectedTaskId(null); // Clear selected task upon adding a new task to avoid confusion
-  };
-
-  const deleteSelectedTask = () => {
-    setTasks(tasks.filter(task => task.id !== selectedTaskId));
-    setSelectedTaskId(null); // Clear selection upon deletion
-  };
-
-  const selectTask = (taskId) => {
-    // Toggle selection state to allow deselecting a task
-    if (taskId === selectedTaskId) {
-      setSelectedTaskId(null);
-    } else {
-      setSelectedTaskId(taskId);
-    }
   };
 
   return (
-      <div className="App">
-        <div className="task-input-area">
-          <input
-            value={newTaskText}
-            onChange={(e) => setNewTaskText(e.target.value)}
-            placeholder="Enter new task"
-            className="new-task-input"
-          />
-          <button onClick={addNewTask} className="add-task-btn">Add Task</button>
-          <button onClick={deleteSelectedTask} disabled={!selectedTaskId} className="delete-task-btn">Delete Selected Task</button>
-        </div>
-        <div 
-          onDrop={e => onDrop(e, 'issue')}
-          onDragOver={onDragOver}
-          className="task-column issues"
-        >
-          <h3>Issues</h3>
-          {tasks
-            .filter(task => task.status === 'issue')
-            .map(task => (
-              <div
-                key={task.id}
-                draggable
-                onDragStart={e => onDragStart(e, task.id)}
-                onClick={() => selectTask(task.id)}
-                className={`task-item ${task.id === selectedTaskId ? 'selected' : ''}`}
-              >
-                {task.text}
-              </div>
-            ))}
-        </div>
-        <div 
-          onDrop={e => onDrop(e, 'complete')}
-          onDragOver={onDragOver}
-          className="task-column completed"
-        >
-          <h3>Completed</h3>
-          {tasks
-            .filter(task => task.status === 'complete')
-            .map(task => (
-              <div
-                key={task.id}
-                draggable
-                onDragStart={e => onDragStart(e, task.id)}
-                onClick={() => selectTask(task.id)}
-                className="task-item"
-              >
-                {task.text}
-              </div>
-            ))}
-        </div>
+    <div className="App">
+      <div className="task-input-area">
+        <input
+          value={newTaskText}
+          onChange={(e) => setNewTaskText(e.target.value)}
+          placeholder="Enter new task"
+          className="new-task-input"
+        />
+        <button onClick={addNewTask} className="add-task-btn">Add Task</button>
       </div>
+      {['issue', 'complete'].map(status => (
+        <div
+          key={status}
+          className={`task-column ${status}`}
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, status)}
+        >
+          <h3>{status.charAt(0).toUpperCase() + status.slice(1)}</h3>
+          {tasks.filter(task => task.status === status).map((task, index) => (
+            <div
+              key={task.id}
+              data-id={task.id}
+              draggable="true"
+              onDragStart={(e) => handleDragStart(e, task)}
+              className="task-item"
+            >
+              {task.text}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
