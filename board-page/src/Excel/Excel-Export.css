@@ -1,0 +1,20 @@
+ 
+  .export-to-excel {
+    
+    background-color: #A4EFA9; /* This is the green background color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px; /* Adjust the padding to match the tabs */
+    margin-right: 10px; /* Right margin for spacing */
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #000000; /* Font color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: if you want to include shadow */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .export-to-excel:hover {
+    background-color: peachpuff; /* A slightly lighter green for the hover effect */
+  }
+  
+  /* Add styles for your TabBar here to match the design of the tabs */
