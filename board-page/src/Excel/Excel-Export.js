@@ -2,12 +2,22 @@ import React from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import './Excel-Export.css'
+import { useRef } from 'react';
 
 function ExcelExport( { data } ) {
-    const handleExport = () => {
 
+    //const [filter, setFilter] = useRef('아이탬 이름'); // State to store the filter value
+
+    const handleExport = () => {
+        //let exportData = data;
+
+        // 필터가 설정되어 있으면 데이터를 필터링합니다
+        //if (filter) {
+        //    exportData = data.filter(item => item.name === filter);
+        //}
          // 새 워크북을 생성하고 워크시트를 추가합니다
         const wb = XLSX.utils.book_new();
+        //const ws = XLSX.utils.json_to_sheet(exportData);
         const ws = XLSX.utils.json_to_sheet(data);
 
         // JSON 데이터의 구조를 원하는 키 이름으로 매핑합니다
