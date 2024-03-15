@@ -52,15 +52,7 @@
   /* align-content : space-evenly;*/
 
   
-.flex-item {
-  background-color: #ccc; /* Background color  */
-  border: 5px solid red; 
-  border-radius: 10px;
-  width: 80px; 
-  height: 80px; 
-  padding: 0.2em;
-  text-align: center;
-}
+
 
 }
 
