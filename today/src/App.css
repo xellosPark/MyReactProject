@@ -3,3 +3,23 @@
   height:50px;
   border:1px solid lightblue;
 }
+
+
+
+.menu-container {
+  position: relative;
+  text-align: center;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.divider {
+  height: 30px; /* Adjust the height to match your design */
+  width: 2px;
+  background-color: #ffffff;
+}

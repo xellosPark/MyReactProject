@@ -92,8 +92,7 @@ function KanBanBoardBody() {
         </button>
       </div>
       {["issue", "complete"].map((status) => (
-        <div
-          key={status}
+        <div key={status}
           className={`task-column ${status}`}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, status)}
