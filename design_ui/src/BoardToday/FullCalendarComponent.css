@@ -2,7 +2,7 @@
 .calendar-parent {
     height: 100%;    
     margin: 10px 10px 0px 5px;
-
+    
 }
 
 /* 캘린더 전체 사이즈 조정 */
@@ -64,6 +64,7 @@
 .fc .fc-daygrid-day.fc-day-today {
     background-color: #FFF67E;
     color: #6895D2;
+    
 }
 
 /* 날짜별 그리드 */
@@ -84,6 +85,19 @@
     border-radius: 5px;
     font-weight: 500;
     font-size: 10px;
+    
+}
+
+.fc-daygrid-day-events {
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 100px; /* Sets the maximum height for the event area */
+    
+}
+
+  /* This ensures that the entire calendar row has a minimum height to accommodate events */
+.fc-daygrid-day {
+    height: 120px; /* Adjust this value based on your calendar's design needs */
+    position: relative; /* Needed for absolute positioning of children */
 }
 
 /* 주말 셀의 폰트 색상을 빨간색으로 설정 */

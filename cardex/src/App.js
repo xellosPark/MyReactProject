@@ -1,8 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useEffect, useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { useEffect, useState, useRef  } from 'react';
+import { Dropdown, Button } from 'react-bootstrap';
 
 // 콤포넌트는 항상 대문자 시작 
 function Item(props) {
@@ -18,6 +18,12 @@ function Item(props) {
       period: '23.03.06~24.03.06',
       users: ['Hong Gil-dong']
     },
+
+    {
+      projectName: 'Project 3',
+      period: '23.03.06~24.03.22',
+      users: ['Hong Gil']
+    },
     // Add more projects as needed
   ];
 
@@ -25,6 +31,9 @@ function Item(props) {
   const [selectedProjectName, setSelectedProjectName] = useState(
     projects.length > 0 ? projects[0].projectName : "No Data"
   );
+
+    // Use useRef to keep track of the selected project name
+    const selectedProjectRef = useRef(projects[0].projectName);
   
 
   // Handle selection of a project
@@ -32,9 +41,12 @@ function Item(props) {
     const selectedProject = projects.find(project => project.projectName === eventKey);
     if (selectedProject) {
       setSelectedProjectName(selectedProject.projectName);
+
+      selectedProjectRef.current = eventKey;
+      console.log(selectedProjectRef.current);
     }
 
-    console.log("여기");
+
   };
 
   return (
@@ -46,24 +58,37 @@ function Item(props) {
           {props.email} <br></br>- Phone: {props.phone} <br></br>- Website:{" "}
           {props.website}
         </p>
-        <Dropdown onSelect={handleSelect}>
-          <Dropdown.Toggle
-            variant="success"
-            id="dropdown-basic"
-            className="w-100 text-left"
+        <div className="d-flex align-items-center">
+          <Dropdown
+            onSelect={handleSelect}
+            className="me-2"
+            style={{ flexGrow: 1 }}
           >
-            {selectedProjectName}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu className="w-100">
-            {projects.map((project, index) => (
-              <Dropdown.Item key={index} eventKey={project.projectName}>
-                {project.projectName}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        );
+            <Dropdown.Toggle
+              variant="success"
+              id="dropdown-basic"
+              style={{ width: "100%" }}
+            >
+              {selectedProjectName}
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="w-100">
+              {projects.map((project, index) => (
+                <Dropdown.Item
+                  key={index}
+                  eventKey={project.projectName}
+                  className="d-flex align-items-center justify-content-between"
+                >
+                  {project.projectName}
+                  {selectedProjectName === project.projectName ? (
+                    <span className="text-warning  ms-2 fs-3">★</span> // Star for selected item
+                  ) : (
+                    <span className="text-secondary ms-2 fs-3">☆</span> // Grey star for unselected items
+                  )}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       </div>
     </div>
   );
@@ -79,7 +104,7 @@ function App() {
     .then(json => setUsers(json))
   }, []); // 데이터 받아오기를 한번만 하게하기 위해서...
 
-  console.log("user??", users);
+  // console.log("user??", users);
   
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
