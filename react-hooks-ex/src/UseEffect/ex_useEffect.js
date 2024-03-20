@@ -1,11 +1,16 @@
 import React from 'react';
 
-function ex_useEffect(props) {
+function ExuseEffect() {
+
+    const handleConutUpdate = () => {
+
+    };
+
     return (
-        <div>
-            
-        </div>
+        <>
+            <button onCick={handleConutUpdate}></button>
+        </>
     );
 }
 
-export default ex_useEffect;
+export default ExuseEffect;
