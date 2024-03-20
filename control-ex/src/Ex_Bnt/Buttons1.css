@@ -1,0 +1,58 @@
+.button-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: #000; /* Adjust if necessary to match your design */
+  }
+  
+.button1{
+    padding: 10px 20px;
+    border: 2px solid #555; /* Initial border color */
+    background-color: transparent; /* Transparent background initially */
+    color: white; /* Initial text color */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for all changes */
+  }
+  
+  /* Normal state styles (just the border color) */
+.button1.standard   {  border-color: #333; }
+.button1.red        { color: red;  border-color: red; }
+.button1.orange     { color: orange;  border-color: orange; }
+.button1.yellow     { color: yellow;  border-color: yellow; }
+.button1.olive      { color: olive;  border-color: olive; }
+.button1.green      { color: green;  border-color: green; }
+.button1.teal       { color: teal;  border-color: teal; }
+.button1.blue       { color: blue;  border-color: blue; }
+.button1.violet     { color: violet;  border-color: violet; }
+.button1.purple     { color: purple;  border-color: purple; }
+.button1.pink       { color: pink;  border-color: pink; }
+.button1.brown      { color: brown;  border-color: brown; }
+.button1.grey       { color: grey;  border-color: grey; }
+.button1.black      { border-color: #333; }
+  
+  /* Hover state styles (background color and border color change) */
+  .button1:hover {
+    color: black; /* Text color for better contrast on hover */
+    border-color: currentColor; /* Border color matches the background */
+  }
+  
+  .button1.standard:hover { background-color: #333; }
+  .button1.red:hover      { background-color: red; }
+  .button1.orange:hover   { background-color: orange; }
+  .button1.yellow:hover   { background-color: yellow; }
+  .button1.olive:hover    { background-color: olive; }
+  .button1.green:hover    { background-color: green; }
+  .button1.teal:hover     { background-color: teal; }
+  .button1.blue:hover     { background-color: blue; }
+  .button1.violet:hover   { background-color: violet; }
+  .button1.purple:hover   { background-color: purple; }
+  .button1.pink:hover     { background-color: pink; }
+  .button1.brown:hover    { background-color: brown; }
+  .button1.grey:hover     { background-color: grey; }
+  .button1.black:hover    { color: white; background-color: black; }
+  
+  /* Selected state styles */
+  .selected {
+    color: black; /* Text color for better visibility */
+    background-color: currentColor; /* Background color matches the border color */
+  }
