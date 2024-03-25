@@ -7,12 +7,17 @@ import './FullCalendarComponent.css';
 export default function FullCalendarComponent({ selectedCategory }) {
 
   const allEvents = [
-    { title: '이벤트 1', date: '2024-03-17', category: 'normal', backgroundColor: '#ff9f89', borderColor: '#ff9f89', textColor: '#333' },
-    { title: '이벤트 2', date: '2024-03-17', category: 'normal', backgroundColor: '#ffc0cb', borderColor: '#ffc0cb', textColor: '#333' },
-    { title: '이벤트 3', date: '2024-03-17', category: 'issue', backgroundColor: '#ffdfba', borderColor: '#ffdfba', textColor: '#333' },
-    { title: '이벤트 4', date: '2024-03-17', category: 'issue', backgroundColor: '#ffffba', borderColor: '#ffffba', textColor: '#333' },
-    { title: '이벤트 5', date: '2024-03-17', category: 'normal', backgroundColor: '#baffc9', borderColor: '#baffc9', textColor: '#333' },
-    { title: '이벤트 6', date: '2024-03-17', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
+    { title: '이벤트 1', date: '2024-03-22', category: 'comp', backgroundColor: '#ff9f89', borderColor: '#ff9f89', textColor: '#333' },
+    { title: '이벤트 2', date: '2024-03-22', category: 'comp', backgroundColor: '#ffc0cb', borderColor: '#ffc0cb', textColor: '#333' },
+    { title: '이벤트 3', date: '2024-03-22', category: 'issue', backgroundColor: '#ffdfba', borderColor: '#ffdfba', textColor: '#333' },
+    { title: '이벤트 4', date: '2024-03-22', category: 'issue', backgroundColor: '#ffffba', borderColor: '#ffffba', textColor: '#333' },
+    { title: '이벤트 5', date: '2024-03-22', category: 'comp', backgroundColor: '#baffc9', borderColor: '#baffc9', textColor: '#333' },
+    { title: '이벤트 6', date: '2024-03-22', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
+    { title: '이벤트 7', date: '2024-03-22', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
+    { title: '이벤트 8', date: '2024-03-22', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
+    { title: '이벤트 9', date: '2024-03-17', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
+    { title: '이벤트 10', date: '2024-03-17', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
+    { title: '이벤트 11', date: '2024-03-17', category: 'issue', backgroundColor: '#bae1ff', borderColor: '#bae1ff', textColor: '#333' },
   ];
 
   const [filteredEvents, setFilteredEvents] = useState(allEvents);

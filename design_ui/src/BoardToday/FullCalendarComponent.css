@@ -91,7 +91,6 @@
 .fc-daygrid-day-events {
     overflow-y: auto; /* Enables vertical scrolling */
     max-height: 100px; /* Sets the maximum height for the event area */
-    
 }
 
   /* This ensures that the entire calendar row has a minimum height to accommodate events */
@@ -109,4 +108,16 @@
 /* 토요일 날짜 파란색 */
 .fc .fc-day-sat a {
     color: blue;
+}
+
+.fc-theme-standard th {
+    flex: 0 0 70px; /* flex-grow, flex-shrink, flex-basis 값을 0, 0, 70px으로 설정 */
+    height: 32px;
+    padding-top: 3.5px;
+    background: #e5edff;
+    border: 1px solid #dddee0;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    color: #7b7b7b;
 }

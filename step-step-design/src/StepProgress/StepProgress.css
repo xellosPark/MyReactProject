@@ -1,0 +1,48 @@
+/* StepProgress.css */
+.step-progress {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* A subtle gradient background */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* A subtle shadow for depth */
+  }
+  
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .step-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+  }
+  
+  .step-icon.completed {
+    background-color: #4CAF50; /* Green background for completed steps */
+  }
+  
+  .step-icon.current {
+    background-color: #2196F3; /* Blue background for the current step */
+  }
+  
+  .step-text {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .step-connector {
+    flex: 1;
+    height: 2px;
+    background-color: #ddd;
+    margin: 0 10px;
+  }
