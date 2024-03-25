@@ -1,0 +1,93 @@
+/* GanttChart.css */
+.gantt-chart {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+  
+  .gantt-header, .gantt-row {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+  
+  .gantt-header {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .gantt-column, .gantt-cell {
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  .gantt-column {
+    min-width: 50px;
+  }
+  
+  .task-name {
+    flex: 0 0 150px; /* Fixed width for task name */
+    text-align: left;
+  }
+  
+  .task-duration {
+    flex: 0 0 100px; /* Fixed width for task duration */
+  }
+  
+  .gantt-bars {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    height: 30px; /* Height of the row */
+    border-left: 1px solid #ccc; /* Separator for months */
+  }
+  
+  .gantt-bar-container {
+    flex: 1; /* Evenly distribute space for each month */
+    position: relative; /* To position bars within */
+  }
+  
+  .gantt-bar {
+    position: absolute;
+    height: 20px; /* Height of the bar */
+    background-color: #3498db; /* Default color for the bar */
+    border-radius: 5px; /* Rounded corners for the bar */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Additional styling for the chart */
+  .gantt-chart .gantt-row:nth-child(even) .gantt-bar {
+    background-color: #f39c12; /* Alternate color for even rows */
+  }
+  
+  .gantt-chart .gantt-row:nth-child(odd) .gantt-bar {
+    background-color: #2ecc71; /* Alternate color for odd rows */
+  }
+  
+  .gantt-chart .gantt-row .gantt-bar.completed {
+    background-color: #95a5a6; /* Color for completed tasks */
+  }
+  
+  .gantt-chart .gantt-row .gantt-bar.current {
+    background-color: #e74c3c; /* Color for the current task */
+  }
+  
+  /* Adjustments for responsive design */
+  @media (max-width: 768px) {
+    .task-name {
+      flex: 0 0 120px; /* Smaller width for task name on smaller screens */
+    }
+  
+    .task-duration {
+      flex: 0 0 80px; /* Smaller width for task duration on smaller screens */
+    }
+  }
+  
+  /* Hover effect for interactivity */
+  .gantt-bar:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
