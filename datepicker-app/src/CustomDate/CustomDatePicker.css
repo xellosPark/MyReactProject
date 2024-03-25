@@ -6,6 +6,7 @@
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     border-radius: 8px;
+    height: 50vh;
   }
   
   .date-range-selector {
@@ -23,4 +24,10 @@
     border-radius: 4px;
     margin-left: 8px;
     cursor: pointer;
+  }
+
+  /* 검색 결과 스타일링 */
+.search-results {
+    margin-top: 4px; /* 상단 여백을 줄입니다 */
+    /* 다른 필요한 스타일링이 있다면 여기에 추가하세요 */
   }
