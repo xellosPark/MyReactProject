@@ -107,10 +107,19 @@ const deletePost = (req, res) => {
     });
 };
 
+//
+const UploadFilePost = (req, res) => {
+    console.log("여기");
+    const { originalname } = req.file.originalname; // URL 파라미터에서 id 추출
+    console.log(originalname);
+    res.send({ message: '파일이 성공적으로 업로드 되었습니다.', file: req.file }); // 클라이언트에 응답 전송
+};
+
 module.exports = {
     getPosts,
     getPostByTitle,
     getAllTitles,
     editPost,
-    deletePost
+    deletePost,
+    UploadFilePost,
 };
