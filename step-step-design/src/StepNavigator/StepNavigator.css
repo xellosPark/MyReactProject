@@ -1,0 +1,62 @@
+.step-navigator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .step-indicator-container {
+    list-style: none;
+    padding: 0;
+    display: flex; /* This should make the li elements display in a row */
+    flex-direction: row; /* Explicitly define the flex direction as row */
+    justify-content: center; /* Center the items on the main axis */
+    gap: 10px; /* Adds space between each step */
+  }
+  
+  .step {
+    display: flex;
+    flex-direction: row; /* Align the number and label in a row for horizontal layout */
+    align-items: center; /* Vertically align the contents of each step */
+  }
+  
+  .step-content {
+    display: flex;
+    flex-direction: column; /* Keeps the number above the label */
+    align-items: center; /* Centers the content */
+  }
+  
+  .step-number {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border: 2px solid #4caf50;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 5px; /* Add space to the right of the number */
+    background-color: white;
+    color: #4caf50;
+  }
+  
+  .step.active .step-number {
+    background-color: #4caf50; /* Active step color */
+    color: white;
+  }
+  
+  .step-label {
+    text-align: center;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    justify-content: center; /* Centers the buttons */
+    margin-top: 20px;
+  }
+  
+  .navigation-buttons button {
+    margin: 0 5px;
+    padding: 5px 15px;
+  }
+  
+  .navigation-buttons button:disabled {
+    opacity: 0.5;
+  }
