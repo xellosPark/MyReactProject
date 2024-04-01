@@ -1,16 +1,21 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const cors = require('cors'); // cors 모듈을 불러옵니다.
 
-
 const app = express();
 const port = 5050;
+// 수정 후
+app.use(express.json());
 
 // JWT 비밀 키 (실제 환경에서는 보안을 위해 환경 변수 등으로 관리)
 const SECRET_KEY = 'your_secret_key';
-app.use(cors()); // 모든 라우트에 대해 CORS를 허용합니다.
-app.use(bodyParser.json());
+const corsOptions = {
+  origin: 'http://localhost:3000', // 클라이언트 애플리케이션이 호스팅되는 도메인
+  credentials: true, // 쿠키를 포함시키기 위해 필요
+};
+
+app.use(cors(corsOptions));
 
 // 사용자 데이터 예제 (실제 환경에서는 데이터베이스에서 관리)
 const users = [
@@ -26,34 +31,26 @@ app.get('/', function(req, res) {
 });
 
 app.post('/login', (req, res) => {
-  // let id = 'abcd'
-  // let pw = '1234'
-
+  console.log("login 시도");
+  console.log(req.body);
   const { userId, phoneLast4Digits } = req.body;
-
-  // 추출한 id와 pw를 서버 콘솔에 로그로 기록합니다.
   console.log(`로그인 시도: id = ${userId}, pw = ${phoneLast4Digits}`);
 
-  console.log("서버 접속 완료");
-
-   // DB확인
-   // selet = from user where id = '${id}' and pw = '${pw}'
-
-   // 데이터 존재
-   // 토큰 존재
-
-   //https://awlhdla.tistory.com/144 참조
-
-   // https://www.npmjs.com/package/jsonwebtoken
-   token = jwt.sign({
-    type: 'JWT',
-    id: userId,
-  }, '1234', {
-    expiresIn: '15m', // 만료시간 15분
-    issuer: 'yhw',
+  // 로그인 로직 처리...
+  const token = jwt.sign({ type: 'JWT', id: userId }, 'your_secret_key', {
+      expiresIn: '15m', // 만료 시간 설정
+      issuer: 'YourIssuer'
   });
-  res.json({ token }); // 토큰을 JSON 형태로 반환
-  console.log(token);
+
+   // 쿠키에 토큰 설정
+   res.cookie("accessToken", token, {
+    maxAge: 900000, // 쿠키 만료 시간(밀리초 단위), 여기서는 15분
+    secure: true, // HTTPS를 사용하는 프로덕션 환경에서는 true로 설정
+    httpOnly: true, // 클라이언트 측 JS가 쿠키에 접근하지 못하도록 설정
+    sameSite: 'none', // 크로스 사이트 요청에 대한 쿠키 전송 설정
+});
+  // 응답 전송
+  res.send("로그인 성공");
 });
 
 // 미들웨어를 불러옵니다.
