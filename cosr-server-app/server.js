@@ -7,7 +7,8 @@ const app = express();
 app.use(express.json()); // This line is crucial for parsing JSON request bodies
 
 let allowedOrigins = [
-    'http://localhost:3000' 
+    'http://localhost:3000',
+    'http://localhost:3001'
     
   ];
 // Specific CORS configuration
