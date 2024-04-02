@@ -11,13 +11,12 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.json());
-app.use(cookieParser());
 
 const SECRET_KEY = 'your_secret_key';
 
 // Login route for issuing a token
 app.post('/login', (req, res) => {
+  console.log("여기요");
   const { username, password } = req.body;
 
   // Here, you would typically verify the username and password against your user store

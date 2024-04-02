@@ -11,31 +11,44 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.json());
-app.use(cookieParser());
 
-const SECRET_KEY = 'your_secret_key';
 
-// Login route for issuing a token
+const SECRET_KEY = '1234'; // 실제 환경에서는 환경 변수에서 이 값을 로드해야 합니다.
+const REFRESH_SECRET_KEY = '1234'; // 리프레시 토큰을 위한 별도의 시크릿 키
+
+// 로그인 라우트 설정: 토큰 발행
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  // Here, you would typically verify the username and password against your user store
-  // This is a simplified example without actual authentication for demonstration purposes
+  // 일반적으로 여기에서 데이터베이스에 대해 사용자 이름과 비밀번호를 검증합니다.
   if (username && password) {
-    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+    // 인증이 성공하면 접근 토큰과 리프레시 토큰을 발행합니다.
+    const accessToken = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1m" }); // 수명이 짧은 접근 토큰
+    const refreshToken = jwt.sign({ username }, REFRESH_SECRET_KEY, { expiresIn: '7d' }); // 수명이 긴 리프레시 토큰
 
-    // Optionally, set the token in an HttpOnly cookie
-    res.cookie('token', token, {
+    // 수명이 짧은 접근 토큰을 HttpOnly 쿠키에 설정
+    res.cookie('accessToken', accessToken, {
       httpOnly: true,
-      secure: false, // Set to true if you're using HTTPS
-      sameSite: 'None', // Use 'None' for cross-site requests, but you'll need to use 'secure' with it
-      maxAge: 3600000 // 1 hour
+      secure: false, // HTTPS를 사용하는 경우 true로 설정
+      sameSite: 'None', // CSRF 보호를 위해 'Strict' 또는 'Lax'로 설정, 크로스 사이트 요청의 경우 'None'
     });
-    console.log(`Token issued for user: ${username}`); // Log token issuance
-    res.json({ message: 'Authentication successful', token }); // Send token back
+
+    // 선택적으로, 수명이 긴 리프레시 토큰을 별도의 HttpOnly 쿠키에 전송
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: false, // HTTPS를 사용하는 경우 true로 설정
+      sameSite: 'None', // 위와 동일한 이유로 설정
+    });
+
+    // 사용자에게 토큰 발행을 로그로 남기고 JSON 형식으로 두 토큰 모두 클라이언트에 응답으로 전송
+    console.log(`사용자 ${username}에 대한 접근 및 리프레시 토큰이 발행되었습니다.`);
+    res.json({
+      message: '인증 성공',
+      accessToken,  // 참고: 실제 애플리케이션에서는 HttpOnly 쿠키에 설정하는 경우 JSON 응답에서 접근 토큰을 보내지 마세요.
+      refreshToken  // 클라이언트가 안전하게 저장해야 하는 경우 리프레시 토큰을 응답 본문에 전송할 수 있습니다.
+    });
   } else {
-    res.status(401).json({ message: 'Authentication failed' });
+    res.status(401).json({ message: '인증 실패' });
   }
 });
 
