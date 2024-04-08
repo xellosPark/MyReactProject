@@ -3,7 +3,7 @@ import Table from './Table';
 import Pagination from './Pagination';
 
 // 가정: postData는 제공된 포스트 객체 배열입니다.
-import postData from '../posts.json';
+import postData from './posts.json';
 
 const BulletinBoard = () => {
   const [posts, setPosts] = useState(postData); // 포스트 데이터 상태 관리
