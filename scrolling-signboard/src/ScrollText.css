@@ -1,0 +1,22 @@
+/* src/ScrollText.css */
+@keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .container {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll 15s linear infinite; 
+  }
