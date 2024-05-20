@@ -18,10 +18,10 @@ function App() {
       
       <BulletinBoard />
       
-      <TabBatBody tabs={tabs} />
+      {/* <TabBatBody tabs={tabs} />
       <TabBatBody2 tabs={tabs2} />
       <TabBar />
-      <ExcelExport data={postsData} />
+      <ExcelExport data={postsData} /> */}
     </div>
   );
 }

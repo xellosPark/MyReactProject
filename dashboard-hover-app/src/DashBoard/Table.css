@@ -1,0 +1,38 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .preview-container {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .preview {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    top: 100%; /* 말풍선 위치 */
+    left: 20%; /* 마우스 위치 기준 */
+    transform: translateX(-50%); /* 중앙 정렬 */
+    background-color: #f2f8b7; /* 기본 배경색 */
+    color: #000; /* 텍스트 색상 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    padding: 10px;
+    white-space: normal; /* 텍스트 줄바꿈 */
+    text-align: left;
+    max-width: 300px; /* 말풍선 최대 너비 */
+    word-wrap: break-word; /* 단어 줄바꿈 */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* 그림자 효과 */
+    margin-top: 8px; /* 마우스와의 거리 */
+  }
+  
+  .preview-container:hover .preview {
+    display: block;
+  }
