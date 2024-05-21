@@ -1,0 +1,4 @@
+{
+    "ignore": ["cloned-repo/*"],
+    "watch": ["server.js"]
+  }

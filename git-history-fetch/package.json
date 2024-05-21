@@ -1,0 +1,25 @@
+{
+  "name": "git-history-fetch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --ignore 'cloned-repo/*' server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "proPark",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "nodemon": "^3.1.0",
+    "rimraf": "^5.0.7",
+    "simple-git": "^3.24.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "description": ""
+}
