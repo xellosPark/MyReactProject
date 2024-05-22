@@ -11,9 +11,9 @@ const git = simpleGit();
 
 const repoUrl = 'http://git.ubisam.local/Project/lpc/lgd-m-rnd/aurora_lpc/source.git';
 // const repoUrl = 'http://git.ubisam.local/Project/ELA/ELA_BACKBOX_ver_2015.git';
-// const repoUrl = 'https://github.com/xellosPark/WebServer.git';
+//const repoUrl = 'https://github.com/xellosPark/WebServer.git';
 
-const localPath = path.resolve(__dirname, 'cloned-repo');
+const localPath = path.resolve(__dirname, 'lpc');
 
 app.use(cors());
 
@@ -82,6 +82,7 @@ app.get('/repo-history', async (req, res) => {
     console.log('저장소 히스토리를 가져오는 중...');
     const log = await git.cwd(localPath).log();
     console.log('저장소 히스토리를 성공적으로 가져왔습니다');
+    console.log('저장소 히스토리를 성공적으로 가져왔습니다',log);
     res.json(log.all);
   } catch (err) {
     if (err.message.includes('does not have any commits yet')) {

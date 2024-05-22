@@ -1,20 +1,25 @@
+const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const simpleGit = require('simple-git');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const http = require('http');
+const socketIo = require('socket.io');
 
-// 경로 설정
-const sourceRepoPath = path.resolve('./source-repo');
+const app = express();
+const PORT = 3001;
 
-// 로그 함수
+app.use(bodyParser.json());
+app.use(cors());
+
 const log = (message) => {
   const timestamp = new Date().toISOString();
   console.log(`[${timestamp}] ${message}`);
 };
 
-// Git 클론 또는 업데이트 함수
-const cloneOrUpdateRepo = async (repoUrl, repoPath, repoName) => {
-  // Ensure the directory exists
+const cloneOrUpdateRepo = async (repoUrl, repoPath, repoName, io) => {
   if (!fs.existsSync(repoPath)) {
     fs.mkdirSync(repoPath, { recursive: true });
   }
@@ -29,6 +34,7 @@ const cloneOrUpdateRepo = async (repoUrl, repoPath, repoName) => {
 
         gitProcess.stdout.on('data', (data) => {
           log(`[${repoName} 진행 상황] ${data.toString()}`);
+          io.emit('progress', data.toString());
         });
 
         gitProcess.stderr.on('data', (data) => {
@@ -38,6 +44,7 @@ const cloneOrUpdateRepo = async (repoUrl, repoPath, repoName) => {
           } else {
             log(`[${repoName} 진행 상황] ${message}`);
           }
+          io.emit('progress', message);
         });
 
         gitProcess.on('close', (code) => {
@@ -65,13 +72,12 @@ const cloneOrUpdateRepo = async (repoUrl, repoPath, repoName) => {
   }
 };
 
-// 커밋 로그 가져오기
-const getCommitLog = async () => {
-  const gitSource = simpleGit(sourceRepoPath);
+const getCommitLog = async (repoPath) => {
+  const git = simpleGit(repoPath);
 
   try {
     log('커밋 로그 가져오기 시작');
-    const logSummary = await gitSource.log();
+    const logSummary = await git.log();
     log('커밋 로그 가져오기 완료');
     return logSummary.all;
   } catch (error) {
@@ -80,25 +86,43 @@ const getCommitLog = async () => {
   }
 };
 
-// 스크립트를 실행하는 메인 함수
-const main = async () => {
-  //const sourceRepoUrl = 'https://github.com/xellosPark/MyReactProject.git';
-  const sourceRepoUrl = 'http://git.ubisam.local/Project/lpc/lgd-m-rnd/aurora_lpc/source.git';
+const getProjectName = (repoUrl) => {
+    const urlParts = repoUrl.split('/');
+    const repoNameWithGit = urlParts[urlParts.length - 1];
+    const repoName = repoNameWithGit.replace('.git', '');
+    return repoName;
+  };
 
-  log('스크립트 시작');
+app.post('/clone-or-update', async (req, res) => {
+  const { repoUrl } = req.body;
+  const repoName = getProjectName(repoUrl);
+  log(`clone 제목: ${repoName}`);
+  const sourceRepoPath = path.resolve(`./Github-Repo/${repoName}`);
 
   try {
-    await cloneOrUpdateRepo(sourceRepoUrl, sourceRepoPath, '소스 레포지토리');
+    const io = req.app.get('io');
+    await cloneOrUpdateRepo(repoUrl, sourceRepoPath, '소스 레포지토리', io);
 
-    const commitLog = await getCommitLog();
-    commitLog.forEach(commit => {
-      log(`커밋: ${commit.hash} - ${commit.message} (작성자: ${commit.author_name}, 날짜: ${commit.date})`);
-    });
-
-    log('스크립트 완료');
+    const commitLog = await getCommitLog(sourceRepoPath);
+    res.json({ commitLog });
   } catch (error) {
-    log(`메인 함수 중 오류: ${error.message}`);
+    res.status(500).json({ error: error.message });
   }
-};
+});
 
-main();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: '*',
+  }
+});
+
+app.set('io', io);
+
+io.on('connection', (socket) => {
+  log('클라이언트 연결됨');
+});
+
+server.listen(PORT, () => {
+  log(`서버가 포트 ${PORT}에서 시작되었습니다.`);
+});

@@ -10,10 +10,10 @@ const port = 3001;  // 서버 포트를 설정합니다.
 
 // 저장소 URL 배열 (주석 처리된 URL 제외)
 const repoUrls = [
-  // 'http://git.ubisam.local/Project/lpc/lgd-m-rnd/aurora_lpc/source.git',
-  // 'http://git.ubisam.local/Project/ELA/ELA_BACKBOX_ver_2015.git',
+  //'http://git.ubisam.local/Project/lpc/lgd-m-rnd/aurora_lpc/source.git',
+   // 'http://git.ubisam.local/Project/ELA/ELA_BACKBOX_ver_2015.git',
   // 'https://github.com/xellosPark/WebServer.git',
-  'https://github.com/xellosPark/ReactNative.git'
+  //'https://github.com/xellosPark/ReactNative.git'
 ];
 
 app.use(cors());  // CORS를 사용하도록 설정합니다.

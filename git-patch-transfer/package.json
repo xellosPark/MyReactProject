@@ -1,15 +1,19 @@
 {
   "name": "git-patch-transfer",
   "version": "1.0.0",
-  "description": "",
+  "description": "npm install express nodemon cors dotenv jsonwebtoken cookie-parser\r npm install multer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "proPark",
   "license": "ISC",
   "dependencies": {
-    "simple-git": "^3.24.0"
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "simple-git": "^3.24.0",
+    "socket.io": "^4.7.5"
   }
 }
