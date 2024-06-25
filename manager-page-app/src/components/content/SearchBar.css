@@ -6,13 +6,10 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    width: 100%; /* Make the search bar full width */
   }
-  
   .search-bar > div,
   .search-bar > span {
-    margin-right: 10px; /* Add spacing between text and other elements */
+    margin-right: 15px; /* Add spacing between text and other elements */
   }
   
   .date-picker,
@@ -22,7 +19,7 @@
     padding: 5px;
     border-radius: 3px;
     border: 1px solid #ccc;
-    width: auto; /* Adjust width */
+    width: 150px; /* Adjust width */
   }
   
   .search-button {
@@ -37,4 +34,5 @@
   
   .search-button i {
     font-size: 16px;
+    width: 80px;
   }

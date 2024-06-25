@@ -27,6 +27,7 @@ const SearchBar = () => {
         placeholderText="End Date"
         className="date-picker"
       />
+      <div>Day</div>
       <select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
@@ -37,6 +38,7 @@ const SearchBar = () => {
         <option value="option2">Option 2</option>
         <option value="option3">Option 3</option>
       </select>
+      <div>검색</div>
       <input type="text" placeholder="내용입력" className="input-field" />
       <button className="search-button">
         <i className="fas fa-search"></i>
