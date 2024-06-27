@@ -1,10 +1,10 @@
 import React from 'react';
+import UserInfo from './UserInfo';
 
 const UserProfile = () => {
   return (
-    <div>
-      <h1>User Profile</h1>
-      <p>This is the User Profile content.</p>
+    <div className="user-profile">
+      <UserInfo />
     </div>
   );
 };
