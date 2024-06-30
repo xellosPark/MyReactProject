@@ -18,6 +18,10 @@ const rows = [
 const UserInfo = () => {
   return (
     <div className="table-container">
+      <div className="table-header">
+        전체 레코드 수: {rows.length}
+        <button className="add-button">회원 추가</button>
+      </div>
       <table>
         <thead>
           <tr>
