@@ -15,13 +15,13 @@ const UserInfo = ({ rows, onRowClick }) => {
         전체 인원 수: {rows.length}
         <button className="add-button">회원 추가</button>
       </div>
-      <table>
+      <table className="user-table">
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Password</th>
-            <th>Edit Information</th>
+            <th className="edit-header">Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,9 @@ const UserInfo = ({ rows, onRowClick }) => {
               <td>{row.name}</td>
               <td>{row.email}</td>
               <td>{row.password}</td>
-              <td><button className="edit-button">Edit</button></td>
+              <td>
+                <i className="fas fa-edit edit-icon"></i>
+              </td>
             </tr>
           ))}
         </tbody>

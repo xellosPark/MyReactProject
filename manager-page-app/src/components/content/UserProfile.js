@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserInfo from './UserInfo';
 import UserUnitInfo from './UserUnitInfo';
+import './UserProfile.css';
 
 const createData = (name, email, password, rank, yearOfJoining) => {
   return { name, email, password: '****', rank, yearOfJoining };
@@ -25,7 +26,7 @@ const rows = [
 ];
 
 const UserProfile = () => {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(rows[0]);
 
   const handleRowClick = (user) => {
     setSelectedUser(user);
@@ -33,8 +34,12 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-container">
-      <UserInfo rows={rows} onRowClick={handleRowClick} />
-      <UserUnitInfo user={selectedUser || {}} />
+      <div className="user-info-section">
+        <UserInfo rows={rows} onRowClick={handleRowClick} />
+        <div className="user-unit-info-section">
+          <UserUnitInfo user={selectedUser || {}} />
+        </div>
+      </div>
     </div>
   );
 };
