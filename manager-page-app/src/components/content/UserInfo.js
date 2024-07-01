@@ -1,25 +1,18 @@
-// src/components/UserInfo.js
-import React from 'react';
+import React, { useState } from 'react';
 import './UserInfo.css';
 
-const createData = (name, email, password, rank, yearOfJoining) => {
-  return { name, email, password: '****', rank, yearOfJoining };
-};
+const UserInfo = ({ rows, onRowClick }) => {
+  const [page, setPage] = useState(0);
+  const rowsPerPage = 7;
 
-const rows = [
-  createData('Jon Snow', 'jon@example.com', '****', 'A', 2015),
-  createData('Cersei Lannister', 'cersei@example.com', '****', 'B', 2012),
-  createData('Jaime Lannister', 'jaime@example.com', '****', 'A', 2011),
-  createData('Arya Stark', 'arya@example.com', '****', 'C', 2016),
-  createData('Daenerys Targaryen', 'daenerys@example.com', '****', 'A', 2017),
-  // Add more rows as needed
-];
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
 
-const UserInfo = () => {
   return (
     <div className="table-container">
       <div className="table-header">
-        전체 레코드 수: {rows.length}
+        전체 인원 수: {rows.length}
         <button className="add-button">회원 추가</button>
       </div>
       <table>
@@ -28,26 +21,25 @@ const UserInfo = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Password</th>
-            <th>Rank</th>
-            <th>Year of Joining</th>
             <th>Edit Information</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
-            <tr key={index}>
+          {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+            <tr key={index} onClick={() => onRowClick(row)}>
               <td>{row.name}</td>
               <td>{row.email}</td>
               <td>{row.password}</td>
-              <td>{row.rank}</td>
-              <td>{row.yearOfJoining}</td>
-              <td>
-                <button className="edit-button">Edit</button>
-              </td>
+              <td><button className="edit-button">Edit</button></td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="pagination">
+        <button onClick={() => handleChangePage(page - 1)} disabled={page === 0}>Previous</button>
+        <span>{page + 1} of {Math.ceil(rows.length / rowsPerPage)}</span>
+        <button onClick={() => handleChangePage(page + 1)} disabled={page >= Math.ceil(rows.length / rowsPerPage) - 1}>Next</button>
+      </div>
     </div>
   );
 };

@@ -1,25 +1,22 @@
 .table-container {
-  width: 100%;
-  margin: 20px auto;
+  width: 50%;
+  margin: 5px;
   overflow-x: auto;
 }
 
 .table-header {
   display: flex;
-  justify-content: space-between; /* 왼쪽과 오른쪽에 요소를 배치 */
+  justify-content: space-between;
   align-items: center;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-bottom: 2px solid #ddd;
-  padding-left: 20px; /* 왼쪽 여백 추가 */
-  padding-right: 100px; /* 오른쪽 여백 추가 */
+  padding: 2px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .table-header div {
-  padding-left: 5px; /* 왼쪽 여백 추가 */
+  padding-left: 5px;
 }
 
 .add-button {
@@ -35,11 +32,9 @@
   background-color: #0056b3;
 }
 
-
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
   font-family: Arial, sans-serif;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -49,17 +44,16 @@ th, td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  position: relative; /* th에 대해 의사 요소를 상대적으로 위치시킵니다. */
+  position: relative;
 }
 
-/* 특정 열 사이에만 수직선을 추가하는 스타일 */
 th:not(:last-child)::after {
   content: "";
   position: absolute;
-  top: 25%; /* 선이 중간에서 시작되도록 아래로 이동 */
-  bottom: 25%; /* 높이를 50% 줄입니다. */
+  top: 30%;
+  bottom: 30%;
   right: 0;
-  width: 1px; /* 수직선의 너비 */
+  width: 1px;
   background-color: #ddd;
 }
 
@@ -68,13 +62,22 @@ th {
   color: #333;
   font-weight: normal;
   font-size: 14px;
- 
 }
 
 td {
   background-color: #fff;
   color: #333;
   font-size: 14px;
+}
+
+/* 짝수 행의 배경색을 흰색으로 변경 */
+tr:nth-child(even) td {
+  background-color: #fff;
+}
+
+/* 홀수 행의 배경색을 회색으로 설정 */
+tr:nth-child(odd) td {
+  background-color: #f5f5f5;
 }
 
 tr:hover td {
@@ -92,4 +95,30 @@ tr:hover td {
 
 .edit-button:hover {
   background-color: #0056b3;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  margin: 0 10px;
 }

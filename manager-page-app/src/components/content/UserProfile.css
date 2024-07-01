@@ -1,7 +1,7 @@
-.user-profile {
-  width: 55%;
-  margin: 0 auto;
+.user-profile-container {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: flex-start;
+  padding: 20px;
 }
