@@ -159,14 +159,16 @@ input:checked + .slider:before {
   background-color: #0056b3;
 }
 
-/* 테이블 헤더 스타일 */.table-header {
+/* 테이블 헤더 스타일 */
+.table-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-/* 테이블 카운터 스타일 */.table-counter {
+/* 테이블 카운터 스타일 */
+.table-counter {
   font-size: 18px;
   font-weight: bold;
   text-align: left;
@@ -176,7 +178,8 @@ input:checked + .slider:before {
   margin: 0 20px; /* 좌우 여백 추가 */
 }
 
-/* 프로젝트 생성 버튼 스타일 */.create-button {
+/* 프로젝트 생성 버튼 스타일 */
+.create-button {
   padding: 5px 10px;
   border: none;
   border-radius: 5px;

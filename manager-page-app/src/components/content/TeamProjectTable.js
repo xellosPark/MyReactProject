@@ -1,10 +1,12 @@
 import React from 'react';
 import TeamProjectTableSub from './TeamProjectTableSub'
+import TeamprojectsData from "./TeamprojectsData"; 
+
 
 const TeamProjectTable = () => {
   return (
     <div>
-        <TeamProjectTableSub />
+        <TeamProjectTableSub posts={TeamprojectsData} />
     </div>
   );
 };
