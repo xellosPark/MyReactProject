@@ -95,8 +95,15 @@ const TeamProjectTableSub = () => {
     setSelectedRow(index);
   };
 
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth() + 1; // 월은 0부터 시작하므로 +1 해줍니다.
+
   return (
     <div className="project-table-container">
+      <div className="table-counter">
+        <span>총 프로젝트: {data.length}</span>
+        <span>현재 기준:  {currentYear}.{currentMonth}</span>
+      </div>  
       <table className="project-table">
         <thead>
           <tr className="project-table-header">
@@ -104,8 +111,8 @@ const TeamProjectTableSub = () => {
             <th className="project-table-header-cell">프로젝트명</th>
             <th className="project-table-header-cell">파트</th>
             <th className="project-table-header-cell">상태</th>
-            <th className="project-table-header-cell">투입인원</th>
-            <th className="project-table-header-cell">공격/수비</th>
+            <th className="project-table-header-cell">인 원</th>
+            <th className="project-table-header-cell">진행률</th>
             <th className="project-table-header-cell">1월</th>
             <th className="project-table-header-cell">2월</th>
             <th className="project-table-header-cell">3월</th>
