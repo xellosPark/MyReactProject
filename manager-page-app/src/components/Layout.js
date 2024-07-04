@@ -28,7 +28,8 @@ const Layout = () => {
         return lazy(() => import('./content/UserProfile'));
       case 'Team':
         return lazy(() => import('./content/TeamProjectTable'));
-      
+      case 'Files':
+        return lazy(() => import('./content/ProjectGanttChartMain'));
       default:
         console.log('알 수 없는 컴포넌트:', componentName);
         return null;
