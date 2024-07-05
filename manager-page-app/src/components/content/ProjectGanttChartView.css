@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
 }
 
 /* Gantt 차트의 헤더 스타일 */
@@ -39,4 +38,28 @@
 /* Gantt 컨테이너 스타일 */
 .gantt-container {
   height: 690px; /* 필요에 따라 높이 조정 */
+}
+
+.gantt-bar {
+  position: absolute;
+  background-color: rgba(0, 128, 0, 0.5);
+  text-align: center;
+  border: 1px solid rgba(0, 128, 0, 0.7);
+  border-radius: 15px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 8px;
+}
+
+.gantt-scale-cell-weekend {
+  color: black !important; /* 주말 셀 폰트 색상 */
+}
+
+.week-end {
+  background-color: #9e5969 !important; /* 주말 셀 배경색 */
+  color: #ffffff !important; /* 주말 셀 폰트 색상 */
+}
+
+.week-day {
+  color: #000000 !important;/* 평일 셀 폰트 색상 */
 }
