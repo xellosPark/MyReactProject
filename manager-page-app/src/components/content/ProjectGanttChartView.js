@@ -63,7 +63,7 @@ const ProjectGanttChartView = ({ data, onDataUpdate }) => {
     }, [data, onDataUpdate]);
 
     return (
-        <div className="gantt-chart">
+       <div className="gantt-chart">
             <div ref={ganttContainer} className="gantt-container"></div>
         </div>
     );

@@ -88,7 +88,6 @@ const ProjectGanttChartMain = () => {
                     ))}
                 </select>
             </div>
-            <h3>프로젝트 명 : {projects[selectedProject].name}</h3>
             <GanttChartView data={projects[selectedProject]} onDataUpdate={handleDataUpdate} />
         </div>
     );
