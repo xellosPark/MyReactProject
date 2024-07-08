@@ -25,6 +25,42 @@ const ProjectGanttChartMain = () => {
                 { id: 5, source: 5, target: 6, type: "0" }
             ]
         },
+        project2: {
+            name: "프로젝트 2",
+            data: [
+                { id: 1, text: "계획", start_date: "03-03-2024", duration: 5, parent:0, open: true, progress: 1},
+                { id: 2, text: "분석", start_date: "10-03-2024", duration: 7, parent:0, progress: 0.6, },
+                { id: 3, text: "설계", start_date: "17-03-2024", duration: 5,parent:0, progress: 0.5, },
+                { id: 4, text: "개발", start_date: "22-03-2024", duration: 10,parent:0, progress: 0.3,},
+                { id: 5, text: "테스트", start_date: "05-04-2024", duration: 7,parent:0, open: true, progress: 0.2, },
+                { id: 6, text: "배포", start_date: "15-04-2024", duration: 3,parent:0,open: true, progress: 0,},
+            ],
+            links: [
+                { id: 1, source: 1, target: 2, type: "0" },
+                { id: 2, source: 2, target: 3, type: "0" },
+                { id: 3, source: 3, target: 4, type: "0" },
+                { id: 4, source: 4, target: 5, type: "0" },
+                { id: 5, source: 5, target: 6, type: "0" }
+            ]
+        },
+        project3: {
+            name: "프로젝트 3",
+            data: [
+                { id: 1, text: "계획", start_date: "03-03-2024", duration: 5, parent:0, open: true, progress: 1},
+                { id: 2, text: "분석", start_date: "10-03-2024", duration: 7, parent:0, open: true,progress: 0.6, },
+                { id: 3, text: "설계", start_date: "17-03-2024", duration: 5,parent:0, open: true,progress: 0.5, },
+                { id: 4, text: "개발", start_date: "22-03-2024", duration: 10,parent:0, open: true,progress: 0.3,},
+                { id: 5, text: "테스트", start_date: "05-04-2024", duration: 7,parent:0, open: true, progress: 0.2, },
+                { id: 6, text: "배포", start_date: "15-04-2024", duration: 3,parent:0,open: true, progress: 0,},
+            ],
+            links: [
+                { id: 1, source: 1, target: 2, type: "0" },
+                { id: 2, source: 2, target: 3, type: "0" },
+                { id: 3, source: 3, target: 4, type: "0" },
+                { id: 4, source: 4, target: 5, type: "0" },
+                { id: 5, source: 5, target: 6, type: "0" }
+            ]
+        },
     };
 
     const [projects, setProjects] = useState(initialProjects);
