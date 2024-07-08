@@ -46,8 +46,25 @@ const ProjectGanttChartView = ({ data, onDataUpdate }) => {
 
         // 이벤트 핸들러 등록
         const handleTaskUpdate = () => {
+
+        const serializedData = gantt.serialize().data.map((task, index) => {
+            const updatedTask = {
+            id: task.parent ? `${task.parent}_${index + 1}` : index + 1,
+            text: task.text,
+            start_date: task.start_date,
+            duration: task.duration,
+            parent: task.parent,
+            progress: task.progress,
+            open: true,
+            };
+
+            return updatedTask;
+        });
+
+            console.log('Serialized Data:', serializedData);
+
             onDataUpdate({
-                data: gantt.serialize().data,
+                data: serializedData,
                 links: gantt.serialize().links
             });
         };

@@ -1,5 +1,5 @@
 .main-container {
-    padding: 5px;
+  padding: 5px;
 }
 
 .project-selection {
@@ -18,5 +18,20 @@
 .project-selection select {
     padding: 5px;
     font-size: 16px;
+}
+
+.export-button {
+    margin-left: auto;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.export-button:hover {
+    background-color: #45a049;
 }
 
