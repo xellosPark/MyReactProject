@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import GanttChartView from './ProjectGanttChartView';
-import './ProjectGanttChartMain.css'; // 새로운 CSS 파일을 importimport * as XLSX from 'xlsx';
+import './ProjectGanttChartMain.css'; // 새로운 CSS 파일을 import
 import * as XLSX from 'xlsx';
+
 const ProjectGanttChartMain = () => {
+    // 초기 프로젝트 데이터 설정
     const initialProjects = {
         project1: {
             name: "프로젝트 1",
@@ -16,13 +18,6 @@ const ProjectGanttChartMain = () => {
                 { id: 7, text: "Test", start_date: "15-04-2024", duration: 3,parent:6, progress: 0,},
                 { id: 8, text: "배포", start_date: "15-04-2024", duration: 3,parent:0,open: true, progress: 0,},
                 { id: 9, text: "모니터링", start_date: "15-04-2024", duration: 3,parent:8, progress: 0,},
-            ],
-            links: [
-                { id: 1, source: 1, target: 2, type: "0" },
-                { id: 2, source: 2, target: 3, type: "0" },
-                { id: 3, source: 3, target: 4, type: "0" },
-                { id: 4, source: 4, target: 5, type: "0" },
-                { id: 5, source: 5, target: 6, type: "0" }
             ]
         },
         project2: {
@@ -34,13 +29,6 @@ const ProjectGanttChartMain = () => {
                 { id: 4, text: "개발", start_date: "22-03-2024", duration: 10,parent:0, progress: 0.3,},
                 { id: 5, text: "테스트", start_date: "05-04-2024", duration: 7,parent:0, open: true, progress: 0.2, },
                 { id: 6, text: "배포", start_date: "15-04-2024", duration: 3,parent:0,open: true, progress: 0,},
-            ],
-            links: [
-                { id: 1, source: 1, target: 2, type: "0" },
-                { id: 2, source: 2, target: 3, type: "0" },
-                { id: 3, source: 3, target: 4, type: "0" },
-                { id: 4, source: 4, target: 5, type: "0" },
-                { id: 5, source: 5, target: 6, type: "0" }
             ]
         },
         project3: {
@@ -52,13 +40,6 @@ const ProjectGanttChartMain = () => {
                 { id: 4, text: "개발", start_date: "22-03-2024", duration: 10,parent:0, open: true,progress: 0.3,},
                 { id: 5, text: "테스트", start_date: "05-04-2024", duration: 7,parent:0, open: true, progress: 0.2, },
                 { id: 6, text: "배포", start_date: "15-04-2024", duration: 3,parent:0,open: true, progress: 0,},
-            ],
-            links: [
-                { id: 1, source: 1, target: 2, type: "0" },
-                { id: 2, source: 2, target: 3, type: "0" },
-                { id: 3, source: 3, target: 4, type: "0" },
-                { id: 4, source: 4, target: 5, type: "0" },
-                { id: 5, source: 5, target: 6, type: "0" }
             ]
         },
     };
@@ -76,17 +57,18 @@ const ProjectGanttChartMain = () => {
             [selectedProject]: {
                 ...projects[selectedProject],
                 data: newData.data,
-                links: newData.links
             }
         });
     };
 
+    // 종료 날짜 계산 함수
     const calculateEndDate = (startDate, duration) => {
         const date = new Date(startDate);
         date.setDate(date.getDate() + duration - 1);
         return date.toISOString().split('T')[0];
     };
 
+    // 프로젝트 종료 날짜 계산 함수
     const calculateProjectEndDate = (projectData) => {
         return projectData.reduce((maxDate, task) => {
             const taskEndDate = new Date(task.start_date);
@@ -95,69 +77,99 @@ const ProjectGanttChartMain = () => {
         }, new Date('1970-01-01'));
     };
 
-    const exportToExcel = () => {
-        const project = projects[selectedProject];
-        const data = project.data.map(task => ({
-            ID: task.id,
-            Task: `${task.indent > 0 ? '- ' : ''}${task.text}`,
-            StartDate: task.start_date,
-            EndDate: calculateEndDate(task.start_date, task.duration),
-            Duration: task.duration,
-            Progress: task.progress,
-            Parent: task.parent
-        }));
+// 엑셀로 내보내기 함수
+const exportToExcel = () => {
+    const project = projects[selectedProject];
+    const data = project.data.map(task => ({
+        ID: task.id,
+        Task: `${task.parent > 0 ? 'L ' : ''}${task.text}`, // indent 설정
+        StartDate: task.start_date,
+        EndDate: calculateEndDate(task.start_date, task.duration),
+        Duration: task.duration,
+        Progress: task.progress,
+        Parent: task.parent
+    }));
 
-        const worksheet = XLSX.utils.json_to_sheet(data, { dateNF: 'yyyy-mm-dd' });
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, project.name);
+    const worksheet = XLSX.utils.json_to_sheet([]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, project.name);
 
-        const startDate = new Date('2024-03-01');  // 프로젝트 시작 날짜 설정 (예시로 2024년 3월 1일 설정)
-        const endDate = calculateProjectEndDate(project.data);  // 프로젝트의 최대 종료 날짜 계산
-        const dateRange = [];
-        for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-            dateRange.push(new Date(d));
-        }
+    // 프로젝트 제목 추가
+    XLSX.utils.sheet_add_aoa(worksheet, [['프로젝트'], [project.name]], { origin: 'A1' });
 
-        const headerRow1 = ['Task'];
-        const headerRow2 = [''];
-        let currentMonth = '';
+      // 프로젝트의 가장 이른 시작 날짜를 계산
+      const earliestStartDate = new Date(Math.min(...project.data.map(task => new Date(task.start_date))));
 
-        dateRange.forEach(date => {
-            const month = `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
-            if (month !== currentMonth) {
-                headerRow1.push(month);
-                currentMonth = month;
-            } else {
-                headerRow1.push('');
+      const endDate = calculateProjectEndDate(project.data);  // 프로젝트의 최대 종료 날짜 계산
+      const dateRange = [];
+      for (let d = new Date(earliestStartDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+          dateRange.push(new Date(d));
+      }
+
+    const headerRow1 = ['Task'];
+    const headerRow2 = [''];
+    let currentMonth = '';
+    let mergeRanges = [];
+    let monthStartIndex = 1;
+
+    dateRange.forEach((date, index) => {
+        const month = `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+        if (month !== currentMonth) {
+            if (currentMonth !== '') {
+                mergeRanges.push({
+                    s: { r: 2, c: monthStartIndex },
+                    e: { r: 2, c: headerRow1.length - 1 }
+                });
+                monthStartIndex = headerRow1.length;
             }
-            headerRow2.push(date.getDate());
+            headerRow1.push(month);
+            currentMonth = month;
+        } else {
+            headerRow1.push('');
+        }
+        headerRow2.push(date.getDate());
+    });
+
+    // 마지막 월 병합 범위 추가
+    if (currentMonth !== '') {
+        mergeRanges.push({
+            s: { r: 2, c: monthStartIndex },
+            e: { r: 2, c: headerRow1.length - 1 }
         });
+    }
 
-        const ganttData = project.data.map(task => {
-            const taskStartDate = new Date(task.start_date);
-            const taskEndDate = new Date(task.start_date);
-            taskEndDate.setDate(taskEndDate.getDate() + task.duration);
-            const row = new Array(dateRange.length).fill('');
-            dateRange.forEach((date, index) => {
-                if (date >= taskStartDate && date <= taskEndDate) {
-                    row[index] = '■';
-                }
-            });
-            return [task.parent > 0 ? ` L ${task.text}` : task.text, ...row]; // Use task.text for the Task column with indent
+    const ganttData = project.data.map(task => {
+        const taskStartDate = new Date(task.start_date);
+        const taskEndDate = new Date(task.start_date);
+        taskEndDate.setDate(taskEndDate.getDate() + task.duration);
+        const row = new Array(dateRange.length).fill('');
+        dateRange.forEach((date, index) => {
+            if (date >= taskStartDate && date <= taskEndDate) {
+                row[index] = '■';
+            }
         });
+        return [task.parent > 0 ? ` L ${task.text}` : task.text, ...row]; // Use task.text for the Task column with indent
+    });
 
-        XLSX.utils.sheet_add_aoa(worksheet, [headerRow1], { origin: -1 });
-        XLSX.utils.sheet_add_aoa(worksheet, [headerRow2], { origin: -1 });
-        XLSX.utils.sheet_add_aoa(worksheet, ganttData, { origin: -1 });
+    XLSX.utils.sheet_add_aoa(worksheet, [headerRow1], { origin: 'A3' });
+    XLSX.utils.sheet_add_aoa(worksheet, [headerRow2], { origin: 'A4' });
+    XLSX.utils.sheet_add_aoa(worksheet, ganttData, { origin: 'A5' });
 
-        // Format columns to ensure dates are displayed correctly
-        const wscols = [
-            { wch: 15 }, 
-        ];
-        worksheet['!cols'] = wscols;
+    // Merge the cells for the month and align center
+    worksheet['!merges'] = mergeRanges;
+    mergeRanges.forEach(merge => {
+        const startCell = XLSX.utils.encode_cell({ r: merge.s.r, c: merge.s.c });
+        if (!worksheet[startCell].s) worksheet[startCell].s = {};
+        worksheet[startCell].s.alignment = { horizontal: 'center', vertical: 'center' };
+    });
 
-        XLSX.writeFile(workbook, `${project.name}.xlsx`);
-    };
+    worksheet['!cols'] = [
+        { wch: 15 }, // Task column
+        ...dateRange.map(() => ({ wch: 3 })) // Date columns
+    ];
+
+    XLSX.writeFile(workbook, `${project.name}.xlsx`);
+};
 
     return (
         <div className="main-container">
