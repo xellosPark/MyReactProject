@@ -8,4 +8,4 @@ npm install react-ganttastic -->
 
 npm install dhtmlx-gantt
 npm install xlsx
-npm install xlsx html2canvas
+npm install xlsx-js-style
