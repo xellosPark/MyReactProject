@@ -6,7 +6,7 @@ import ganttLocale from './ganttLocale'; // 새로운 locale 설정 파일을 im
 
 const ProjectGanttChartView = ({ data, onDataUpdate }) => {
     const ganttContainer = useRef(null);
-
+    
     useEffect(() => {
       // locale 설정 적용
       gantt.locale = ganttLocale;
