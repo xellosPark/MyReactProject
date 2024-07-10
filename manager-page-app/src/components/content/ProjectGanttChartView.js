@@ -53,10 +53,14 @@ const ProjectGanttChartView = ({ data, onDataUpdate }) => {
       const handleTaskUpdate = () => {
         // 부모 ID를 기준으로 자식 인덱스를 관리하기 위한 맵
         const parentTaskIndexMap = {};
-
+        
+        // 부모가 없는 경우의 인덱스 초기화
+        let parentNotIndex = 0;
+        
         // Gantt 데이터를 직렬화하고 각 작업의 ID를 설정하는 단계
         let serializedData = gantt.serialize().data.map((task, index) => {
           let updatedTask;
+          
           if (task.parent) {
             // 부모 ID에 대한 현재 자식 인덱스 가져오기 (없으면 0)
             const parentIndex = parentTaskIndexMap[task.parent] || 0;
@@ -76,8 +80,9 @@ const ProjectGanttChartView = ({ data, onDataUpdate }) => {
             };
           } else {
             // 부모가 없는 경우
+            parentNotIndex += 1; // 인덱스를 1 증가
             updatedTask = {
-              id: index + 1, // 인덱스를 ID로 사용
+              id: parentNotIndex, // 인덱스를 ID로 사용
               text: task.text,
               start_date: task.start_date,
               duration: task.duration,
@@ -86,7 +91,7 @@ const ProjectGanttChartView = ({ data, onDataUpdate }) => {
               open: true,
             };
           }
-          console.log("Updated Task:", updatedTask);
+          //console.log("Updated Task:", updatedTask);
           return updatedTask;
         });
 
