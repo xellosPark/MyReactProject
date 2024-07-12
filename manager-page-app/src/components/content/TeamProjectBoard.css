@@ -1,0 +1,72 @@
+/* 테이블 컨테이너의 패딩 설정 */
+.table-container {
+    padding: 5px;
+  }
+  
+  /* 테이블 스타일 설정 */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px; /* 폰트 크기 설정 */
+  }
+  
+  /* 테이블 헤더와 셀의 스타일 설정 */
+  .styled-table th, .styled-table td {
+    border: 2px solid black; /* 셀의 테두리 설정 */
+    padding: 2px; /* 셀의 패딩 설정 */
+    text-align: center; /* 텍스트 정렬 설정 */
+    
+  }
+
+  .styled-table td {
+    border: 2px solid black; /* 셀의 테두리 설정 */
+    text-align: center; /* 텍스트 정렬 설정 */
+    height: 20px;
+  }
+  
+  /* 월 셀의 스타일 설정 (4개의 주를 포함하는 셀) */
+  .styled-table th[colSpan="4"] {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+  }
+  
+  /* 행 병합된 셀의 왼쪽 테두리 설정 */
+  .styled-table th[rowSpan="2"] {
+    border-left: 2px solid black;
+  }
+  
+  /* 월 헤더 셀의 왼쪽 테두리 두껍게 설정 */
+  .month-header {
+    border-left: 4px solid black;
+    width: 50px; /* 월 셀의 고정된 너비 설정 */
+  }
+  
+  /* 두꺼운 테두리를 적용하는 클래스 */
+  .thick-border {
+    border-left: 4px solid black;
+  }
+  
+  /* 주 셀의 고정된 너비 설정 */
+  .week-cell {
+    width: 40px;
+  }
+  
+  /* 진행 바 스타일 설정 */
+  .progress-bar-container {
+    height: 15px;
+    background-color: #f09139;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #6200ea;
+    text-align: center;
+    line-height: 15px;
+    color: white;
+    border-radius: 5px;
+    
+  }

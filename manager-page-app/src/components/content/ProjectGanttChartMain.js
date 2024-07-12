@@ -1,209 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GanttChartView from './ProjectGanttChartView';
 import './ProjectGanttChartMain.css';
 import XLSX from 'xlsx-js-style';
 
 const ProjectGanttChartMain = () => {
+
+  const getCurrentDate = (offsetDays = 0) => {
+    const date = new Date();
+    date.setDate(date.getDate() + offsetDays);
+    const day = (`0${date.getDate()}`).slice(-2);
+    const month = (`0${date.getMonth() + 1}`).slice(-2);
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   const initialProjects = {
     project1: {
       name: "프로젝트 1",
       data: [
-        {
-          id: 1,
-          text: "계획",
-          start_date: "03-07-2024",
-          duration: 5,
-          parent: 0,
-          open: true,
-          progress: 1,
-        },
-        {
-          id: 2,
-          text: "문석 파악",
-          start_date: "05-07-2024",
-          duration: 5,
-          parent: 1,
-          progress: 0.6,
-        },
-        {
-          id: 3,
-          text: "분석",
-          start_date: "10-07-2024",
-          duration: 7,
-          parent: 0,
-          progress: 0.6,
-        },
-        {
-          id: 4,
-          text: "설계",
-          start_date: "17-07-2024",
-          duration: 5,
-          parent: 0,
-          progress: 0.5,
-        },
-        {
-          id: 5,
-          text: "개발",
-          start_date: "22-07-2024",
-          duration: 10,
-          parent: 0,
-          progress: 0.3,
-        },
-        {
-          id: 6,
-          text: "테스트",
-          start_date: "05-08-2024",
-          duration: 7,
-          parent: 0,
-          open: true,
-          progress: 0.2,
-        },
-        {
-          id: 7,
-          text: "Test",
-          start_date: "15-08-2024",
-          duration: 3,
-          parent: 6,
-          progress: 0,
-        },
-        {
-          id: 8,
-          text: "배포",
-          start_date: "15-08-2024",
-          duration: 3,
-          parent: 0,
-          open: true,
-          progress: 0,
-        },
-        {
-          id: 9,
-          text: "모니터링",
-          start_date: "15-08-2024",
-          duration: 3,
-          parent: 8,
-          progress: 0,
-        },
-      ],
-    },
-    project2: {
-      name: "프로젝트 2",
-      data: [
-        {
-          id: 1,
-          text: "계획",
-          start_date: "03-07-2024",
-          duration: 5,
-          parent: 0,
-          open: true,
-          progress: 1,
-        },
-        {
-          id: 2,
-          text: "분석",
-          start_date: "10-07-2024",
-          duration: 7,
-          parent: 0,
-          progress: 0.6,
-        },
-        {
-          id: 3,
-          text: "설계",
-          start_date: "17-07-2024",
-          duration: 5,
-          parent: 0,
-          progress: 0.5,
-        },
-        {
-          id: 4,
-          text: "개발",
-          start_date: "22-07-2024",
-          duration: 10,
-          parent: 0,
-          progress: 0.3,
-        },
-        {
-          id: 5,
-          text: "테스트",
-          start_date: "05-08-2024",
-          duration: 7,
-          parent: 0,
-          open: true,
-          progress: 0.2,
-        },
-        {
-          id: 6,
-          text: "배포",
-          start_date: "15-08-2024",
-          duration: 3,
-          parent: 0,
-          open: true,
-          progress: 0,
-        },
-      ],
-    },
-    project3: {
-      name: "프로젝트 3",
-      data: [
-        {
-          id: 1,
-          text: "계획",
-          start_date: "03-07-2024",
-          duration: 5,
-          parent: 0,
-          open: true,
-          progress: 1,
-        },
-        {
-          id: 2,
-          text: "분석",
-          start_date: "10-07-2024",
-          duration: 7,
-          parent: 0,
-          open: true,
-          progress: 0.6,
-        },
-        {
-          id: 3,
-          text: "설계",
-          start_date: "17-07-2024",
-          duration: 5,
-          parent: 0,
-          open: true,
-          progress: 0.5,
-        },
-        {
-          id: 4,
-          text: "개발",
-          start_date: "22-07-2024",
-          duration: 10,
-          parent: 0,
-          open: true,
-          progress: 0.3,
-        },
-        {
-          id: 5,
-          text: "테스트",
-          start_date: "05-08-2024",
-          duration: 7,
-          parent: 0,
-          open: true,
-          progress: 0.2,
-        },
-        {
-          id: 6,
-          text: "배포",
-          start_date: "15-08-2024",
-          duration: 3,
-          parent: 0,
-          open: true,
-          progress: 0,
-        },
+        { id: 1, text: "계획",   start_date: getCurrentDate(),  duration: 1, parent: 0, open: true, progress: 0 },
+        { id: 2, text: "분석",   start_date: getCurrentDate(1), duration: 1, parent: 0, open: true, progress: 0 },
+        { id: 3, text: "설계",   start_date: getCurrentDate(2), duration: 1, parent: 0, open: true, progress: 0 },
+        { id: 4, text: "개발",   start_date: getCurrentDate(3), duration: 1, parent: 0, open: true, progress: 0 },
+        { id: 5, text: "테스트", start_date: getCurrentDate(4), duration: 1, parent: 0, open: true, progress: 0 },
+        { id: 6, text: "배포",   start_date: getCurrentDate(5), duration: 1, parent: 0, open: true, progress: 0 },
       ],
     },
   };
 
   const [projects, setProjects] = useState(initialProjects);
   const [selectedProject, setSelectedProject] = useState("project1");
+  const [newProject, setNewProject] = useState('');
 
   const handleProjectChange = (event) => {
     setSelectedProject(event.target.value);
@@ -391,27 +218,80 @@ const ProjectGanttChartMain = () => {
     saveAsJson(`${projects[selectedProject].name}.json`, projectData);
   };
 
+  const NewSave = () => {
+    if (newProject.trim()) {
+      const newProjectKey = `project${Object.keys(projects).length + 1}`;
+
+      const newProjectData = {
+        name: newProject,
+        data: [
+          { id: 1, text: "계획",   start_date: getCurrentDate(), duration: 1,  parent: 0, open: true, progress: 0 },
+          { id: 2, text: "분석",   start_date: getCurrentDate(1), duration: 1, parent: 0, open: true, progress: 0 },
+          { id: 3, text: "설계",   start_date: getCurrentDate(2), duration: 1, parent: 0, open: true, progress: 0 },
+          { id: 4, text: "개발",   start_date: getCurrentDate(3), duration: 1, parent: 0, open: true, progress: 0 },
+          { id: 5, text: "테스트", start_date: getCurrentDate(4), duration: 1, parent: 0, open: true, progress: 0 },
+          { id: 6, text: "배포",   start_date: getCurrentDate(5), duration: 1, parent: 0, open: true, progress: 0 },
+        ],
+      };
+  
+      setProjects({
+        ...projects,
+        [newProjectKey]: newProjectData,
+      });
+  
+      setSelectedProject(newProjectKey); // Optionally select the newly created project
+      setNewProject(''); // Clear the input field
+    } else {
+      alert('프로젝트 이름을 입력해주세요.');
+    }
+  };
+
+  const loadProjects = (fileContent) => {
+    const json = JSON.parse(fileContent);
+    setProjects(json);
+    const firstProjectKey = Object.keys(json)[0];
+    setSelectedProject(firstProjectKey);
+  };
+
+  useEffect(() => {
+    const defaultProjectFile = '/path/to/default/project.json'; // 실제 경로로 대체하세요
+    fetch(defaultProjectFile)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('네트워크 응답이 정상이 아닙니다');
+        }
+        return response.text();
+      })
+      .then(loadProjects)
+      .catch(error => {
+        console.error('기본 프로젝트 로딩 중 오류 발생:', error);
+        setProjects(initialProjects);
+        setSelectedProject("project1");
+      });
+  }, []);
+
   return (
     <div className="main-container">
       <div className="project-selection">
         <label htmlFor="projectSelect">프로젝트 선택:</label>
-        <select
-          id="projectSelect"
-          value={selectedProject}
-          onChange={handleProjectChange}
-        >
+        <select id="projectSelect" value={selectedProject} onChange={handleProjectChange}>
           {Object.keys(projects).map((key) => (
             <option key={key} value={key}>
               {projects[key].name}
             </option>
           ))}
         </select>
-        <button onClick={exportToExcel} className="export-button"> 엑셀로 저장 </button>
+        <button onClick={NewSave} className="export-button"> NEW </button>
+        <input
+          type="text"
+          value={newProject}
+          onChange={(e) => setNewProject(e.target.value)}
+          placeholder="프로젝트 이름"
+        />
         <button onClick={dayProJectSave} className="export-button"> 저장 </button>
-        
+        <button onClick={exportToExcel} className="export-button"> 엑셀로 저장 </button>
       </div>
-      <GanttChartView data={projects[selectedProject]} onDataUpdate={handleDataUpdate}
-      />
+      <GanttChartView data={projects[selectedProject]} onDataUpdate={handleDataUpdate} />
     </div>
   );
 };

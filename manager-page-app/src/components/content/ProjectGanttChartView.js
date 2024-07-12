@@ -27,7 +27,6 @@ const ProjectGanttChartView = ({ data, onDataUpdate }) => {
           },
         },
       ];
-
       gantt.config.inherit_scale_class = true;
 
       // 헤더 높이 설정
