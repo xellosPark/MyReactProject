@@ -12,10 +12,8 @@ import {
 
 const TeamProjectBoard = ({ posts }) => {
   const [selectedRow, setSelectedRow] = useState(null);
-
   const [projectAdd, setProjectAdd] = useState(false);
   const [projectEdit, setProjectEdit] = useState(false);
-
   const [projectData, setProjectData] = useState({
     part: "",
     name: "",
@@ -26,12 +24,24 @@ const TeamProjectBoard = ({ posts }) => {
     state: "",
     desc: "",
   });
+  const [tooltip, setTooltip] = useState({
+    visible: false,
+    content: '',
+    x: 0,
+    y: 0
+  });
 
-  const months = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월",];
+  const months = [
+    "1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"
+  ];
 
-  const headers = ["순번","프로젝트명","파트","상태","인 원","진행률",...months,"이슈 및 비교","수정"];
+  const headers = [
+    "순번","프로젝트명","파트","상태","인 원","진행률",...months,"이슈 및 비교","수정"
+  ];
 
-  const states = ["Setup","Production Setup","Initiation","Development","Planning","Testing"];
+  const states = [
+    "Setup","Production Setup","Initiation","Development","Planning","Testing"
+  ];
 
   const handleCheckboxChange = (index) => {
     setSelectedRow(index);
@@ -118,8 +128,23 @@ const TeamProjectBoard = ({ posts }) => {
     } else {
       setProjectAdd(false);
       setProjectEdit(true);
-      
     }
+  };
+
+  const showTooltip = (content, e) => {
+    setTooltip({
+      visible: true,
+      content,
+      x: e.pageX,
+      y: e.pageY
+    });
+  };
+
+  const hideTooltip = () => {
+    setTooltip({
+      ...tooltip,
+      visible: false
+    });
   };
 
   return (
@@ -329,7 +354,13 @@ const TeamProjectBoard = ({ posts }) => {
                 {row.offense}/{row.defense}
               </td>
               <td className="Teamproject-table-cell" colSpan={row.months}>
-                <div className="Teamprogress-bar-container">
+                <div
+                  className="Teamprogress-bar-container"
+                  onMouseEnter={(e) =>
+                    showTooltip(`Progress: ${row.progress}%`, e)
+                  }
+                  onMouseLeave={hideTooltip}
+                >
                   <div
                     className="Teamprogress-bar"
                     style={{ width: `${row.progress}%` }}
@@ -351,6 +382,23 @@ const TeamProjectBoard = ({ posts }) => {
           ))}
         </tbody>
       </table>
+      {tooltip.visible && (
+        <div
+          className="tooltip"
+          style={{
+            position: 'absolute',
+            top: tooltip.y,
+            left: tooltip.x,
+            backgroundColor: '#333',
+            color: '#fff',
+            padding: '5px',
+            borderRadius: '5px',
+            zIndex: 1000,
+          }}
+        >
+          {tooltip.content}
+        </div>
+      )}
     </div>
   );
 };
