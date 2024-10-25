@@ -3,7 +3,7 @@ import React, { useState, Suspense, lazy } from 'react';
 import Header from './Header';
 import Sider from './Sider';
 import Content from './Content';
-import Footer from './Footer';
+// import Footer from './Footer';
 import './Layout.css';
 
 const Layout = () => {
@@ -63,7 +63,7 @@ const Layout = () => {
           {ActiveComponent && <ActiveComponent />}
         </Suspense>
       </Content>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
