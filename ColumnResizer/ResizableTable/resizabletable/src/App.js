@@ -1,62 +1,44 @@
-// src/App.js
-import React from "react";
-import ResizableVirtualizedTable from "./ResizableTable";
+import React, { useState } from "react";
+import ResizableTable from "./components/ResizableTable";
 
-// 컬럼 정의
-const columns = [
-  {
-    Header: "ID",
-    accessor: "id",
-    width: 100,
-  },
-  {
-    Header: "이름",
-    accessor: "name",
-    width: 200,
-  },
-  {
-    Header: "나이",
-    accessor: "age",
-    width: 100,
-  },
-  {
-    Header: "직업",
-    accessor: "job",
-    width: 200,
-  },
-  {
-    Header: "도시",
-    accessor: "city",
-    width: 150,
-  },
-];
-
-// 데이터 생성 함수
-const createData = (id, name, age, job, city) => {
-  return { id, name, age, job, city };
+const initialColumnWidths = {
+  Name: 150,
+  Age: 100,
+  Email: 200,
+  Address: 150,
+  Phone: 150,
 };
 
-// 샘플 데이터 생성
-const data = [
-  createData(1, "김철수", 29, "개발자", "서울"),
-  createData(2, "이영희", 34, "디자이너", "부산"),
-  createData(3, "박민수", 45, "PM", "인천"),
-  createData(4, "정다인", 28, "마케터", "대구"),
-  createData(5, "최성민", 31, "엔지니어", "광주"),
-  // 필요한 만큼 데이터 추가
-];
+const customList = ["Name", "Age", "Email", "Address", "Phone"];
 
-export default function App() {
-  const loadMoreItems = (startIndex, stopIndex) => {
-    console.log("Load more items from", startIndex, "to", stopIndex);
+const App = () => {
+  const [columnWidths, setColumnWidths] = useState(initialColumnWidths);
+
+  // Example data
+  const customDisplayData = Array.from({ length: 10 }, (_, index) => ({
+    Name: `Name ${index + 1}`,
+    Age: 20 + index,
+    Email: `user${index + 1}@example.com`,
+    Address: `Address ${index + 1}`,
+    Phone: `+1234567890`,
+  }));
+
+  const handleUpdateColumnWidth = (updatedWidths) => {
+    setColumnWidths(updatedWidths.columnWidths);
   };
 
   return (
-    <ResizableVirtualizedTable
-      columns={columns}
-      data={data}
-      loadMoreItems={loadMoreItems}
-      itemCount={data.length}
-    />
+    <div>
+      <h2>Resizable Table Example</h2>
+      <ResizableTable
+        customDisplayData={customDisplayData}
+        totalRecordsCount={customDisplayData.length}
+        customList={customList}
+        columnWidths={columnWidths}
+        onUpdateColumnWidth={handleUpdateColumnWidth}
+      />
+    </div>
   );
-}
+};
+
+export default App;

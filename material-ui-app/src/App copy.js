@@ -941,383 +941,205 @@
 //   );
 // }
 
-// import React, { useState, useEffect } from 'react';
-// import { Tabs, Tab, Box, Button } from '@mui/material';
-// import { DataGrid } from '@mui/x-data-grid';
-// import generateData from './data';
-// import { makeStyles } from '@mui/styles';
+import React, { useState, useEffect } from 'react';
+import { Tabs, Tab, Box, Button } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import generateData from './data';
+import { makeStyles } from '@mui/styles';
 
-// const useStyles = makeStyles({
-//   container: {
-//     display: 'flex',
-//     height: '100vh',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     flexDirection: 'column',
-//   },
-//   table: {
-//     width: '90%',
-//     height: '70%',
-//   },
-//   tabs: {
-//     width: '100%',
-//   },
-//   controlButtons: {
-//     margin: '20px 0',
-//     display: 'flex',
-//     gap: '10px',
-//   },
-// });
+const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+    height: '100vh',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  table: {
+    width: '90%',
+    height: '70%',
+  },
+  tabs: {
+    width: '100%',
+  },
+  controlButtons: {
+    margin: '20px 0',
+    display: 'flex',
+    gap: '10px',
+  },
+});
 
-// export default function App() {
-//   const classes = useStyles();
-//   const [tabValue, setTabValue] = useState(0);
-//   const [page, setPage] = useState(0);
-//   const [pageSize, setPageSize] = useState(10);
+export default function App() {
+  const classes = useStyles();
+  const [tabValue, setTabValue] = useState(0);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
-//   // 데이터 생성 함수
-//   const generateCustomData = () => {
-//     const generatedData = generateData(300);
+  // 데이터 생성 함수
+  const generateCustomData = () => {
+    const generatedData = generateData(300);
 
-//     const tab1Data = generatedData.slice(0, 100).map(row => ({
-//       ...row,
-//       colorState: 'red',
-//       buttonText: 'RISK',
-//     }));
+    const tab1Data = generatedData.slice(0, 100).map(row => ({
+      ...row,
+      colorState: 'red',
+      buttonText: 'RISK',
+    }));
 
-//     const tab2Data = generatedData.slice(100, 200).map(row => ({
-//       ...row,
-//       colorState: 'gray',
-//       buttonText: 'NO RISK',
-//     }));
+    const tab2Data = generatedData.slice(100, 200).map(row => ({
+      ...row,
+      colorState: 'gray',
+      buttonText: 'NO RISK',
+    }));
 
-//     const tab3Data = generatedData.slice(200, 300).map(row => ({
-//       ...row,
-//       colorState: 'gray',
-//       buttonText: 'NO RISK',
-//     }));
+    const tab3Data = generatedData.slice(200, 300).map(row => ({
+      ...row,
+      colorState: 'gray',
+      buttonText: 'NO RISK',
+    }));
 
-//     return [tab1Data, tab2Data, tab3Data];
-//   };
+    return [tab1Data, tab2Data, tab3Data];
+  };
 
-//   // 로컬스토리지에서 데이터를 불러오거나, 없으면 새 데이터를 생성하는 함수
-//   const loadData = () => {
-//     const savedData = localStorage.getItem('dataSets');
-//     if (savedData) {
-//       console.log("로컬스토리지에서 데이터 로드 성공.");
-//       return JSON.parse(savedData);
-//     } else {
-//       console.log("로컬스토리지에서 데이터가 없어 새 데이터를 생성합니다.");
-//       return generateCustomData();
-//     }
-//   };
+  // 로컬스토리지에서 데이터를 불러오거나, 없으면 새 데이터를 생성하는 함수
+  const loadData = () => {
+    const savedData = localStorage.getItem('dataSets');
+    if (savedData) {
+      console.log("로컬스토리지에서 데이터 로드 성공.");
+      return JSON.parse(savedData);
+    } else {
+      console.log("로컬스토리지에서 데이터가 없어 새 데이터를 생성합니다.");
+      return generateCustomData();
+    }
+  };
 
-//   // dataSets 상태를 로컬스토리지에서 불러온 데이터로 초기화
-//   const [dataSets, setDataSets] = useState(loadData);
+  // dataSets 상태를 로컬스토리지에서 불러온 데이터로 초기화
+  const [dataSets, setDataSets] = useState(loadData);
 
-//   // dataSets가 변경될 때마다 로컬스토리지에 저장
-//   useEffect(() => {
-//     localStorage.setItem('dataSets', JSON.stringify(dataSets));
-//   }, [dataSets]);
+  // dataSets가 변경될 때마다 로컬스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem('dataSets', JSON.stringify(dataSets));
+  }, [dataSets]);
 
-//   // 탭 변경 핸들러 함수
-//   const handleTabChange = (event, newValue) => {
-//     setTabValue(newValue);
-//     setPage(0);
-//   };
+  // 탭 변경 핸들러 함수
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+    setPage(0);
+  };
 
-//   // 현재 선택된 탭의 특정 행에 대해 색상 토글을 처리하는 함수
-//   const handleColorToggle = (id) => {
-//     setDataSets((prevDataSets) => {
-//       const updatedTabData = prevDataSets[tabValue].map((row) =>
-//         row.id === id
-//           ? {
-//               ...row,
-//               colorState: row.colorState === 'red' ? 'gray' : 'red',
-//               buttonText: row.buttonText === 'RISK' ? 'NO RISK' : 'RISK',
-//             }
-//           : row
-//       );
-//       const newDataSets = [...prevDataSets];
-//       newDataSets[tabValue] = updatedTabData;
-//       return newDataSets;
-//     });
-//   };
+  // 현재 선택된 탭의 특정 행에 대해 색상 토글을 처리하는 함수
+  const handleColorToggle = (id) => {
+    setDataSets((prevDataSets) => {
+      const updatedTabData = prevDataSets[tabValue].map((row) =>
+        row.id === id
+          ? {
+              ...row,
+              colorState: row.colorState === 'red' ? 'gray' : 'red',
+              buttonText: row.buttonText === 'RISK' ? 'NO RISK' : 'RISK',
+            }
+          : row
+      );
+      const newDataSets = [...prevDataSets];
+      newDataSets[tabValue] = updatedTabData;
+      return newDataSets;
+    });
+  };
 
-//   const handlePageChange = (newPage) => {
-//     setPage(newPage);
-//   };
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
 
-//   const handlePageSizeChange = (newPageSize) => {
-//     setPageSize(newPageSize);
-//     setPage(0);
-//   };
+  const handlePageSizeChange = (newPageSize) => {
+    setPageSize(newPageSize);
+    setPage(0);
+  };
 
-//   const toggleAllColorStates = () => {
-//     setDataSets((prevDataSets) => {
-//       const updatedTabData = prevDataSets[tabValue].map((row) => ({
-//         ...row,
-//         colorState: row.colorState === 'red' ? 'gray' : 'red',
-//         buttonText: row.buttonText === 'RISK' ? 'NO RISK' : 'RISK',
-//       }));
-//       const newDataSets = [...prevDataSets];
-//       newDataSets[tabValue] = updatedTabData;
-//       return newDataSets;
-//     });
-//   };
+  const toggleAllColorStates = () => {
+    setDataSets((prevDataSets) => {
+      const updatedTabData = prevDataSets[tabValue].map((row) => ({
+        ...row,
+        colorState: row.colorState === 'red' ? 'gray' : 'red',
+        buttonText: row.buttonText === 'RISK' ? 'NO RISK' : 'RISK',
+      }));
+      const newDataSets = [...prevDataSets];
+      newDataSets[tabValue] = updatedTabData;
+      return newDataSets;
+    });
+  };
 
-//   const CustomColumnHeader = (params) => (
-//     <Box display="flex" alignItems="center" justifyContent="space-between">
-//       <span>{params.colDef.headerName}</span>
-//       <Button size="small" onClick={toggleAllColorStates} variant="contained" color="primary">
-//         Toggle All
-//       </Button>
-//     </Box>
-//   );
+  const CustomColumnHeader = (params) => (
+    <Box display="flex" alignItems="center" justifyContent="space-between">
+      <span>{params.colDef.headerName}</span>
+      <Button size="small" onClick={toggleAllColorStates} variant="contained" color="primary">
+        Toggle All
+      </Button>
+    </Box>
+  );
 
-//   const columns = [
-//     {
-//       field: 'index',
-//       headerName: '번호',
-//       width: 70,
-//       sortable: false,
-//       renderCell: (params) => {
-//         const rowNumber = page * pageSize + params.rowIndex + 1;
-//         return rowNumber;
-//       },
-//     },
-//     { field: 'id', headerName: 'ID', width: 70 },
-//     { field: 'name', headerName: 'Name', width: 130 },
-//     { field: 'age', headerName: 'Age', type: 'number', width: 90 },
-//     {
-//       field: 'colorToggle',
-//       headerName: 'Color Toggle',
-//       width: 150,
-//       sortable: false,
-//       renderHeader: CustomColumnHeader,
-//       renderCell: (params) => (
-//         <Button
-//           variant="contained"
-//           style={{
-//             backgroundColor: params.row.colorState,
-//             color: 'white',
-//           }}
-//           onClick={() => handleColorToggle(params.row.id)}
-//         >
-//           {params.row.buttonText}
-//         </Button>
-//       ),
-//     },
-//     { field: 'email', headerName: 'Email', width: 200 },
-//     { field: 'address', headerName: 'Address', width: 150 },
-//     { field: 'phone', headerName: 'Phone', width: 150 },
-//     { field: 'company', headerName: 'Company', width: 150 },
-//     { field: 'department', headerName: 'Department', width: 130 },
-//     { field: 'role', headerName: 'Role', width: 130 },
-//   ];
+  const columns = [
+    {
+      field: 'index',
+      headerName: '번호',
+      width: 70,
+      sortable: false,
+      renderCell: (params) => {
+        const rowNumber = page * pageSize + params.rowIndex + 1;
+        return rowNumber;
+      },
+    },
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'age', headerName: 'Age', type: 'number', width: 90 },
+    {
+      field: 'colorToggle',
+      headerName: 'Color Toggle',
+      width: 150,
+      sortable: false,
+      renderHeader: CustomColumnHeader,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: params.row.colorState,
+            color: 'white',
+          }}
+          onClick={() => handleColorToggle(params.row.id)}
+        >
+          {params.row.buttonText}
+        </Button>
+      ),
+    },
+    { field: 'email', headerName: 'Email', width: 200 },
+    { field: 'address', headerName: 'Address', width: 150 },
+    { field: 'phone', headerName: 'Phone', width: 150 },
+    { field: 'company', headerName: 'Company', width: 150 },
+    { field: 'department', headerName: 'Department', width: 130 },
+    { field: 'role', headerName: 'Role', width: 130 },
+  ];
 
-//   return (
-//     <div className={classes.container}>
-//       <div className={classes.controlButtons}>
-//         <Button variant="contained" color="secondary" onClick={() => localStorage.clear()}>
-//           Clear Local Storage
-//         </Button>
-//       </div>
-//       <Tabs value={tabValue} onChange={handleTabChange} className={classes.tabs} centered>
-//         <Tab label="Tab 1" />
-//         <Tab label="Tab 2" />
-//         <Tab label="Tab 3" />
-//       </Tabs>
-//       <Box className={classes.table}>
-//         <DataGrid
-//           rows={dataSets[tabValue]}
-//           columns={columns}
-//           pageSize={pageSize}
-//           rowsPerPageOptions={[10, 15, 20]}
-//           page={page}
-//           onPageChange={handlePageChange}
-//           onPageSizeChange={handlePageSizeChange}
-//           disableSelectionOnClick
-//         />
-//       </Box>
-//     </div>
-//   );
-// }
-
-// App.js
-
-// import React from 'react';
-// import ExampleComponent from './ExampleComponent'; // ExampleComponent를 현재 디렉토리에서 가져옴
-
-// // App 함수 정의
-// const App = () => {
-//   return (
-//     <div>
-//       {/* ExampleComponent 사용 */}
-//       <ExampleComponent />
-//     </div>
-//   );
-// };
-
-// export default App;
-
-// import React, { useState, useEffect } from 'react';
-// import { Tabs, Tab, Box, Button } from '@mui/material';
-// import { DataGrid } from '@mui/x-data-grid';
-// import generateData from './data';
-// import { makeStyles } from '@mui/styles';
-
-// const useStyles = makeStyles({
-//   container: {
-//     display: 'flex',
-//     height: '100vh',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     flexDirection: 'column',
-//   },
-//   table: {
-//     width: '90%', // Set a fixed width for the table container
-//     height: '70%', // Set a fixed height for the table container
-//     overflowX: 'auto', // Allow horizontal scrolling if needed
-//   },
-//   tabs: {
-//     width: '100%',
-//   },
-//   controlButtons: {
-//     margin: '20px 0',
-//     display: 'flex',
-//     gap: '10px',
-//   },
-// });
-
-// export default function App() {
-//   const classes = useStyles();
-//   const [tabValue, setTabValue] = useState(0);
-//   const [page, setPage] = useState(0);
-//   const [pageSize, setPageSize] = useState(10);
-
-//   const generateCustomData = () => {
-//     const generatedData = generateData(300);
-
-//     const tab1Data = generatedData.slice(0, 100).map(row => ({
-//       ...row,
-//       colorState: 'red',
-//       buttonText: 'RISK',
-//     }));
-
-//     const tab2Data = generatedData.slice(100, 200).map(row => ({
-//       ...row,
-//       colorState: 'gray',
-//       buttonText: 'NO RISK',
-//     }));
-
-//     const tab3Data = generatedData.slice(200, 300).map(row => ({
-//       ...row,
-//       colorState: 'gray',
-//       buttonText: 'NO RISK',
-//     }));
-
-//     return [tab1Data, tab2Data, tab3Data];
-//   };
-
-//   const loadData = () => {
-//     const savedData = localStorage.getItem('dataSets');
-//     if (savedData) {
-//       console.log("Loaded data from local storage.");
-//       return JSON.parse(savedData);
-//     } else {
-//       console.log("Generated new data.");
-//       return generateCustomData();
-//     }
-//   };
-
-//   const [dataSets, setDataSets] = useState(loadData);
-
-//   useEffect(() => {
-//     localStorage.setItem('dataSets', JSON.stringify(dataSets));
-//   }, [dataSets]);
-
-//   const handleTabChange = (event, newValue) => {
-//     setTabValue(newValue);
-//     setPage(0);
-//   };
-
-//   const handleColorToggle = (id) => {
-//     setDataSets((prevDataSets) => {
-//       const updatedTabData = prevDataSets[tabValue].map((row) =>
-//         row.id === id
-//           ? {
-//               ...row,
-//               colorState: row.colorState === 'red' ? 'gray' : 'red',
-//               buttonText: row.buttonText === 'RISK' ? 'NO RISK' : 'RISK',
-//             }
-//           : row
-//       );
-//       const newDataSets = [...prevDataSets];
-//       newDataSets[tabValue] = updatedTabData;
-//       return newDataSets;
-//     });
-//   };
-
-//   const handlePageChange = (newPage) => {
-//     setPage(newPage);
-//   };
-
-//   const handlePageSizeChange = (newPageSize) => {
-//     setPageSize(newPageSize);
-//     setPage(0);
-//   };
-
-//   const columns = [
-//     { field: 'index', headerName: '번호', width: 70, sortable: false, renderCell: (params) => page * pageSize + params.rowIndex + 1 },
-//     { field: 'company', headerName: 'Company', minWidth: 150, flex: 1 }, // Allow resizing
-//     { field: 'department', headerName: 'Department', width: 150, maxWidth: 200, minWidth: 100 }, // Set bounds for Department
-//     { field: 'role', headerName: 'Role', width: 130, resizable: false }, // Fixed width for Role
-//   ];
-
-//   return (
-//     <div className={classes.container}>
-//       <div className={classes.controlButtons}>
-//         <Button variant="contained" color="secondary" onClick={() => localStorage.clear()}>
-//           Clear Local Storage
-//         </Button>
-//       </div>
-//       <Tabs value={tabValue} onChange={handleTabChange} className={classes.tabs} centered>
-//         <Tab label="Tab 1" />
-//         <Tab label="Tab 2" />
-//         <Tab label="Tab 3" />
-//       </Tabs>
-//       <Box className={classes.table}>
-//         <DataGrid
-//           rows={dataSets[tabValue]}
-//           columns={columns}
-//           pageSize={pageSize}
-//           rowsPerPageOptions={[10, 15, 20]}
-//           page={page}
-//           onPageChange={handlePageChange}
-//           onPageSizeChange={handlePageSizeChange}
-//           disableSelectionOnClick
-//           style={{
-//             width: '100%',
-//             minWidth: '1200px', // Ensures the table has a minimum width and only specific columns resize
-//           }}
-//         />
-//       </Box>
-//     </div>
-//   );
-// }
-
-import ResizableTable from './components/ResizableTable';
-import React from 'react';
-import ExampleTable from './components/ExampleTable';
-
-function App() {
   return (
-    <div className="App">
-      {/* <ExampleTable /> */}
-      <ResizableTable />
+    <div className={classes.container}>
+      <div className={classes.controlButtons}>
+        <Button variant="contained" color="secondary" onClick={() => localStorage.clear()}>
+          Clear Local Storage
+        </Button>
+      </div>
+      <Tabs value={tabValue} onChange={handleTabChange} className={classes.tabs} centered>
+        <Tab label="Tab 1" />
+        <Tab label="Tab 2" />
+        <Tab label="Tab 3" />
+      </Tabs>
+      <Box className={classes.table}>
+        <DataGrid
+          rows={dataSets[tabValue]}
+          columns={columns}
+          pageSize={pageSize}
+          rowsPerPageOptions={[10, 15, 20]}
+          page={page}
+          onPageChange={handlePageChange}
+          onPageSizeChange={handlePageSizeChange}
+          disableSelectionOnClick
+        />
+      </Box>
     </div>
   );
 }
-
-export default App;

@@ -18,7 +18,10 @@ const columns: GridColDef[] = [
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    valueGetter: (params) => {
+      if (!params || !params.row) return '';
+      return `${params.row.firstName || ''} ${params.row.lastName || ''}`;
+    },
   },
 ];
 
@@ -44,7 +47,25 @@ export default function DataTable() {
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
-        sx={{ border: 0 }}
+        sx={{
+          border: 0,
+          '& .MuiDataGrid-cell': {
+            '&:nth-child(5)': { // Target the 'fullName' column
+              position: 'sticky',
+              left: 0,
+              backgroundColor: 'white', // Keeps cell background consistent with others
+              zIndex: 1,
+            },
+          },
+          '& .MuiDataGrid-columnHeaders': {
+            '& .MuiDataGrid-columnHeader:nth-child(5)': { // Target the header of 'fullName'
+              position: 'sticky',
+              left: 0,
+              backgroundColor: 'white',
+              zIndex: 2,
+            },
+          },
+        }}
       />
     </Paper>
   );
