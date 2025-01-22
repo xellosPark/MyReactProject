@@ -1,0 +1,18 @@
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0 0 auto; /* 고정 크기 */
+}
+
+.middleSection {
+  flex: 1; /* 남은 공간 모두 차지 */
+}
+
+.bottomSection {
+  flex: 0 0 33%; /* 높이를 1/3로 고정 */
+}

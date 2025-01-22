@@ -1,0 +1,76 @@
+.middleSection {
+    background-color: white;
+    width: 100%; /* 전체 너비 */
+    display: flex; /* 가로로 배치 */
+    justify-content: space-around; /* 요소 간 균등 간격 */
+    align-items: flex-start; /* 상단 정렬 */
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 20px; /* 요소 간 간격 */
+  }
+  
+  /* 카드 기본 스타일 */
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center;
+    background-color: #fff;
+    width: 300px;
+    height: 250px;
+    border-radius: 15px;
+    
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  /* 카드 헤더 스타일 */
+  .cardHeader {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555; /* 연한 회색 텍스트 */
+    margin-bottom: 10px; /* 아래 간격 */
+  }
+  
+  /* 카드 본문 스타일 */
+  .cardBody h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: black; /* 파란색 */
+    margin: 0;
+  }
+  
+  /* 날짜 카드 추가 텍스트 */
+  .dateText {
+    font-size: 14px;
+    color: #777; /* 연한 회색 */
+  }
+  
+  /* 차트 컨테이너 */
+  .chartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .chartTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-left: -85px;
+  }
+  
+  .pieChart {
+    width: 300px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
