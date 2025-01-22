@@ -1,22 +1,37 @@
-import { v4 as uuidv4 } from 'uuid';
-
-const generateData = (num) => {
-  const data = [];
-  for (let i = 0; i < num; i++) {
-    data.push({
-      id: uuidv4(),
-      name: `User ${i + 1}`,
-      age: Math.floor(Math.random() * 50) + 20,
-      email: `user${i + 1}@example.com`,
-      address: `Address ${i + 1}`,
-      phone: `+123456789${i}`,
-      company: `Company ${i + 1}`,
-      department: `Dept ${i + 1}`,
-      role: `Role ${i + 1}`,
-      colorState: 'rad',
-    });
-  }
-  return data;
-};
-
-export default generateData;
+export const data = [
+  {
+    firstName: "Dylan",
+    lastName: "Murray",
+    email: "dmurray@yopmail.com",
+    city: "East Daphne",
+    country: "USA",
+  },
+  {
+    firstName: "Raquel",
+    lastName: "Kohler",
+    email: "rkohler33@yopmail.com",
+    city: "Columbus",
+    country: "USA",
+  },
+  {
+    firstName: "Ervin",
+    lastName: "Reinger",
+    email: "ereinger@mailinator.com",
+    city: "Toronto",
+    country: "Canada",
+  },
+  {
+    firstName: "Brittany",
+    lastName: "McCullough",
+    email: "bmccullough44@mailinator.com",
+    city: "Lincoln",
+    country: "USA",
+  },
+  {
+    firstName: "Branson",
+    lastName: "Frami",
+    email: "bframi@yopmain.com",
+    city: "New York",
+    country: "USA",
+  },
+];

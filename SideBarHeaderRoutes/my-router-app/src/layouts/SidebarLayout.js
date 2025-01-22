@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './SidebarLayout.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDesktop,faChartPie } from '@fortawesome/free-solid-svg-icons'
 
 function SidebarLayout() {
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsMinimized(!isMinimized);
+  };
+
   return (
-    <aside style={{ backgroundColor: '#78909c', width: '150px', padding: '10px', color: 'white', display: 'flex', flexDirection: 'column' }}>
-      <Link to="/sidebar/view3" style={{ color: 'white', textDecoration: 'none', margin: '10px 0' }}>사이드 메뉴 1</Link>
-      <Link to="/sidebar/view4" style={{ color: 'white', textDecoration: 'none', margin: '10px 0' }}>사이드 메뉴 2</Link>
-      <Link to="/sidebar/view5" style={{ color: 'white', textDecoration: 'none', margin: '10px 0' }}>사이드 메뉴 3</Link>
+    <aside className={`sidebar ${isMinimized ? 'minimized' : ''}`}>
+      <div className="menu">
+        <Link to="/sidebar/view3" className="menu-item">
+        <span className="custom-icon-size">
+            <FontAwesomeIcon icon={faChartPie } />
+          </span>
+          <span className="text">LLM Service</span>
+        </Link>
+        <Link to="/sidebar/view4" className="menu-item">
+          <span className="custom-icon-size">
+            <FontAwesomeIcon icon={faDesktop} />
+          </span>
+          <span className="text">LLM Ops</span>
+        </Link>
+      </div>
+      {/* 하단 최소화 버튼 */}
+      <div className="bottom-toggle">
+        <span onClick={toggleSidebar} className="toggle-text">
+          {isMinimized ? '➡ ' : '⬅ 최소화'}
+        </span>
+      </div>
     </aside>
   );
 }

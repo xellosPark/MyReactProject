@@ -9,7 +9,7 @@ import SidebarRoutes from './routes/SidebarRoutes';
 function App() {
   return (
     <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
         {/* 헤더 레이아웃 */}
         <HeaderLayout />
 

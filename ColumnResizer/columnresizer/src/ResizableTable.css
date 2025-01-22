@@ -1,0 +1,38 @@
+.table-container {
+    width: 95%; /* 테이블 너비를 부모 컨테이너의 95%로 제한 */
+    margin: 20px auto; /* 테이블 중앙 정렬 */
+    overflow: hidden; /* 스크롤 방지 */
+    border: 1px solid #ddd; /* 테두리 */
+  }
+  
+  .resizable-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 고정된 열 레이아웃 */
+  }
+  
+  .resizable-table th,
+  .resizable-table td {
+    border: 1px solid #ddd;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 8px;
+  }
+  
+  .resizable-table th {
+    position: relative;
+    background: #f7f7f7;
+    font-weight: bold;
+  }
+  
+  .resize-handle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    cursor: col-resize;
+    background-color: transparent;
+  }
