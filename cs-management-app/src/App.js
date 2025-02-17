@@ -68,6 +68,8 @@ function App() {
         site: '파주[패턴]',
       },
     ]);
+
+    
   return (
     <div className={styles.app}>
       <Header />

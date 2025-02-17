@@ -1,0 +1,23 @@
+[
+    {
+      "category": "Category 1",
+      "task": "Task 1",
+      "plan": {
+        "plannedWork": "Planned work for week 1",
+        "actualWork": "Actual work for week 1",
+        "completionDate": "2025-01-30",
+        "progress": "100%"
+      }
+    },
+    {
+      "category": "Category 2",
+      "task": "Task 2",
+      "plan": {
+        "plannedWork": "Planned work for week 2",
+        "actualWork": "Actual work for week 2",
+        "completionDate": "2025-02-15",
+        "progress": "75%"
+      }
+    }
+  ]
+  
